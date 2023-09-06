@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de la conversion{% endblock %}
+
+{% block body %}
+    <h1>Résultat de la conversion</h1>
+    <p>Allure : {{ allure }}</p>
+    <p>Vitesse : {{ temps }} km/h</p>
+    <a href="{{ path('app_convertisseur') }}">Retourner au formulaire</a>
+{% endblock %}
