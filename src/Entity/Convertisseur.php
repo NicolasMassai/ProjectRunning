@@ -21,19 +21,14 @@ class Convertisseur
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $allure = null;
-/*
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $allure = null;*/
 
     #[ORM\Column(nullable: true)]
-    private ?int $distance = null;
+    private ?float $distance = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $temps = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $temps = null;
   
-   /* #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
-*/
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,45 +58,31 @@ class Convertisseur
         return $this;
     }
 
-    public function getDistance(): ?int
+    public function getDistance(): ?float
     {
         return $this->distance;
     }
 
-    public function setDistance(?int $distance): static
+    public function setDistance(?float $distance): static
     {
         $this->distance = $distance;
 
         return $this;
     }
 
-    public function getTemps(): ?\DateTimeInterface
+    public function getTemps(): ?string
     {
         return $this->temps;
     }
 
-    public function setTemps(?\DateTimeInterface $temps): static
+    public function setTemps(?string $temps): static
     {
         $this->temps = $temps;
 
         return $this;
     }
 
-   /* public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }*/
-/*
-    public function __toString(){
-        return $this->name; // Remplacer champ par une propriété "string" de l'entité
-    }*/
+   
 
   
 }

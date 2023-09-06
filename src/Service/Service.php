@@ -59,8 +59,7 @@ class Service extends AbstractController
     {
 
         // Convertie la vitesse en allure en min/km
-        $allure = 60 / $vitesseKmH;
-        
+        $allure = 60 / $vitesseKmH;       
         list($minutes, $seconds) = explode('.', $allure);
 
         $allureMinKm = implode(".",[0 , ($seconds)]);
@@ -68,13 +67,14 @@ class Service extends AbstractController
         // Arrondie les seconde à l'unité
         $seconde = round($allureMinKm *60,0,PHP_ROUND_HALF_UP);
 
-
         //list($seconde) = explode('.', $a);
         $allureMinKm2 = implode(".",[$minutes , $seconde]);
-    
-        
-
+         
         return $allureMinKm2;
     }
+
+   
+
+
 
 }
