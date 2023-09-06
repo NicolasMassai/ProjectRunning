@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ConvertisseurRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Double;
+use PhpParser\Node\Stmt\Do_;
 
 #[ORM\Entity(repositoryClass: ConvertisseurRepository::class)]
 class Convertisseur
@@ -15,7 +17,7 @@ class Convertisseur
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?int $vitesse = null;
+    private ?float $vitesse = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $allure = null;
@@ -37,12 +39,12 @@ class Convertisseur
         return $this->id;
     }
 
-    public function getVitesse(): ?int
+    public function getVitesse(): ?float
     {
         return $this->vitesse;
     }
 
-    public function setVitesse(?int $vitesse): static
+    public function setVitesse(?float $vitesse): static
     {
         $this->vitesse = $vitesse;
 

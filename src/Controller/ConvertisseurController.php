@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\Service;
 use App\Entity\Convertisseur;
 use App\Form\ConvertisseurType;
+use App\Form\ConvertisseurVitesseToAllureType;
 use App\Repository\ConvertisseurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\ByteString;
@@ -25,6 +26,7 @@ class ConvertisseurController extends AbstractController
         $this->convertRepository = $convertRepository;
         $this->em = $em;
     }    
+
     #[Route('/convertisseur', name: 'app_convertisseur')]
     public function convert(Request $request, Service $service): Response
     {
@@ -36,29 +38,50 @@ class ConvertisseurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $running = $form->get('allure')->getData();    
-            $speedInMetersPerSecond = $service->convertisseur2($running);
+            $nombre = $service->convertisseur2($running);
+            $speedInKilometerperHour = round($nombre, 2);
             
             $this->em->persist($c);
             $this->em->flush();
             
             return $this->render('convertisseur/resultat.html.twig', [
                 'allure' => $running,
-                'temps' => $speedInMetersPerSecond,
+                'temps' => $speedInKilometerperHour,
             ]);
         }
 
         return $this->render('convertisseur/index.html.twig', [
             'form' => $form->createView(),
         ]);
+
+       
     }
 
-    /*
-    public function convertisseur(Service $myService, Request $request): Response
-
+    #[Route('/convertisseur2', name: 'app_convertisseur2')]
+    public function convertVitesseToAllure(Request $request, Service $service): Response
     {
-        $form = $myService->convertisseur($request, new Convertisseur, new ConvertisseurType, new ByteString('convertisseur'), new ByteString('convertisseur'));
 
-        return $form;
+    $c = new Convertisseur();
+    $form = $this->createForm(ConvertisseurVitesseToAllureType::class, $c);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $running = $form->get('vitesse')->getData();    
+        $nombre = $service->convertisseurVitessetoAllure($running);
+        
+        $this->em->persist($c);
+        $this->em->flush();
+        
+        return $this->render('convertisseur2/resultat.html.twig', [
+            'temps' => $running,
+            'allure' => $nombre,
+        ]);
     }
-    */
+
+    return $this->render('convertisseur2/index.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
 }

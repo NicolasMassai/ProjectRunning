@@ -42,10 +42,10 @@ class Service extends AbstractController
     public function convertisseur2($pace)
     {
         // Assurez-vous que $pace est au format "hh:mm:ss" (heures:minutes:secondes)
-        list($hours, $minutes, $seconds) = explode(':', $pace);
+        list($minutes, $seconds) = explode(':', $pace);
 
         // Convertissez le temps en secondes
-        $totalSeconds = ($hours * 3600) + ($minutes * 60) + $seconds;
+        $totalSeconds = ($minutes * 60) + $seconds;
 
         // Calcul de la vitesse en mètres par seconde (m/s)
         $distanceInMeters = 1000; // Par exemple, si le pace est en kilomètres
@@ -53,6 +53,28 @@ class Service extends AbstractController
         $speedInKiloMeterPerHeure = $speedInMetersPerSecond * 3.6;
 
         return $speedInKiloMeterPerHeure;
+    }
+
+    public function convertisseurVitessetoAllure($vitesseKmH)
+    {
+
+        // Convertie la vitesse en allure en min/km
+        $allure = 60 / $vitesseKmH;
+        
+        list($minutes, $seconds) = explode('.', $allure);
+
+        $allureMinKm = implode(".",[0 , ($seconds)]);
+
+        // Arrondie les seconde à l'unité
+        $seconde = round($allureMinKm *60,0,PHP_ROUND_HALF_UP);
+
+
+        //list($seconde) = explode('.', $a);
+        $allureMinKm2 = implode(".",[$minutes , $seconde]);
+    
+        
+
+        return $allureMinKm2;
     }
 
 }
