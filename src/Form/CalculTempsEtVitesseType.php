@@ -8,13 +8,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CalculVitesseEtAllureType extends AbstractType
+class CalculTempsEtVitesseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('distance')
-            ->add('temps')
+            ->add('allure')
             ->add('Calculer',SubmitType::class)
 
         ;

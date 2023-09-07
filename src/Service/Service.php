@@ -39,9 +39,8 @@ class Service extends AbstractController
         ]);
     }
 
-    public function convertisseur2($pace)
+    public function convertisseurAllureToVitesse($pace)
     {
-        // Assurez-vous que $pace est au format "hh:mm:ss" (heures:minutes:secondes)
         list($minutes, $seconds) = explode(':', $pace);
 
         // Convertissez le temps en secondes
@@ -58,19 +57,77 @@ class Service extends AbstractController
     public function convertisseurVitessetoAllure($vitesseKmH)
     {
 
-        // Convertie la vitesse en allure en min/km
         $allure = 60 / $vitesseKmH;       
-        list($minutes, $seconds) = explode('.', $allure);
 
-        $allureMinKm = implode(".",[0 , ($seconds)]);
 
-        // Arrondie les seconde à l'unité
-        $seconde = round($allureMinKm *60,0,PHP_ROUND_HALF_UP);
+        if (strpos($allure, '.') === false) {
 
-        //list($seconde) = explode('.', $a);
-        $allureMinKm2 = implode(".",[$minutes , $seconde]);
-         
-        return $allureMinKm2;
+            $allurefinal = implode(":",[$allure, 0]);
+
+            return $allurefinal;    
+        
+        }
+        else{
+
+            // Convertie la vitesse en allure en min/km
+            list($minutes, $seconds) = explode('.', $allure);
+
+            $allureMinKm = implode(".",[0 , ($seconds)]);
+
+            // Arrondie les seconde à l'unité
+            $seconde = round($allureMinKm *60,0,PHP_ROUND_HALF_UP);
+
+            //list($seconde) = explode('.', $a);
+            $allureMinKm2 = implode(":",[$minutes , $seconde]);
+            
+            return $allureMinKm2;
+        }
+    }
+
+    public function convertisseurTempsenHMS($temps)
+    {
+
+        if (strpos($temps, '.') === false) {
+
+            return $temps;    
+        
+        }
+        else{
+
+            list($heures, $minutestemp) = explode('.', $temps);
+
+            $calculeminutetemp = implode(".",[0 , ($minutestemp)]);
+
+            $calculeminute = $calculeminutetemp *60;
+
+            if (strpos($calculeminute, '.') === false) {
+
+                $heurefinal = implode(":",[$heures, $calculeminute  , 0]);
+    
+                return $heurefinal; 
+            
+            }
+            else{
+
+                list($minutes, $secondetemp) = explode('.', $calculeminute);
+
+                $calculesecondetemp = implode(".",[0 , ($secondetemp)]);
+
+                $calculeseconde = $calculesecondetemp * 60;
+
+                list($secondes) = explode('.', $calculeseconde);
+
+                $heurefinal = implode(":",[$heures, $minutes , $secondes]);
+
+                return $heurefinal;
+            }
+        }
+
+    }
+
+    public function convertisseurAllure($allure)
+
+    {
     }
 
    

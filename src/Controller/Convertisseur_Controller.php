@@ -4,18 +4,20 @@ namespace App\Controller;
 
 use App\Service\Service;
 use App\Entity\Convertisseur;
-use App\Form\CalculVitesseEtAllureType;
 use App\Form\ConvertisseurType;
-use App\Form\ConvertisseurVitesseToAllureType;
-use App\Repository\ConvertisseurRepository;
+use App\Form\CalculTempsEtAllureType;
+use App\Form\CalculTempsEtVitesseType;
+use App\Form\CalculVitesseEtAllureType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\ByteString;
+use App\Repository\ConvertisseurRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\ConvertisseurVitesseToAllureType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ConvertisseurController extends AbstractController
+class Convertisseur_Controller extends AbstractController
 {
 
     private EntityManagerInterface $em;
@@ -39,7 +41,7 @@ class ConvertisseurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $running = $form->get('allure')->getData();    
-            $nombre = $service->convertisseur2($running);
+            $nombre = $service->convertisseurAllureToVitesse($running);
             $speedInKilometerperHour = round($nombre, 2);
             
             $this->em->persist($c);
@@ -124,6 +126,100 @@ class ConvertisseurController extends AbstractController
     }
 
     return $this->render('convertisseur3/index.html.twig', [
+        'form' => $form->createView(),
+    ]);
+
+}
+    #[Route('/convertisseur4', name: 'app_convertisseur4')]
+    public function calculTempsetAllure(Request $request, Service $service): Response
+    {
+
+    $c = new Convertisseur();
+    $form = $this->createForm(CalculTempsEtAllureType::class, $c);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $distance = $form->get('distance')->getData(); 
+        $vitesse = $form->get('vitesse')->getData(); 
+
+
+        $tempstemp = $distance/$vitesse;
+        
+
+        $temps = $service->convertisseurTempsenHMS($tempstemp);
+
+        $allure = $service->convertisseurVitessetoAllure($vitesse);
+
+
+        $this->em->persist($c);
+        $this->em->flush();
+        
+        return $this->render('convertisseur4/resultat.html.twig', [
+            'distance' => $distance,
+            'temps' => $temps,
+            'vitesse' => $vitesse,
+            'allure' => $allure,
+        ]);
+    }
+
+    return $this->render('convertisseur4/index.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
+#[Route('/convertisseur5', name: 'app_convertisseur5')]
+    public function calculTempsEtVitesse(Request $request, Service $service): Response
+    {
+
+    $c = new Convertisseur();
+    $form = $this->createForm(CalculTempsEtVitesseType::class, $c);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $distance = $form->get('distance')->getData(); 
+        $allure = $form->get('allure')->getData(); 
+
+        list($minutes, $seconds) = explode(':', $allure);
+
+        
+
+        $secondetemp =  ($seconds / 0.6);
+        $secondes = round($secondetemp, 0,PHP_ROUND_HALF_UP);
+
+
+        $totalallure = implode(".",[$minutes , $secondes]);
+
+
+
+        $tempstemp = ($distance * $totalallure / 60);
+
+        $vitessetemp = $distance/$tempstemp;
+
+        $temps = $service->convertisseurTempsenHMS($tempstemp);
+
+        $vitesse = round($vitessetemp, 2,PHP_ROUND_HALF_UP);
+
+        
+
+
+        
+
+
+
+        $this->em->persist($c);
+        $this->em->flush();
+        
+        return $this->render('convertisseur5/resultat.html.twig', [
+            'distance' => $distance,
+            'temps' => $temps,
+            'vitesse' => $vitesse,
+            'allure' => $allure,
+        ]);
+    }
+
+    return $this->render('convertisseur5/index.html.twig', [
         'form' => $form->createView(),
     ]);
 }
