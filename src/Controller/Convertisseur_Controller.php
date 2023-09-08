@@ -4,14 +4,16 @@ namespace App\Controller;
 
 use App\Service\Service;
 use App\Entity\Convertisseur;
-use App\Form\ConvertisseurType;
 use App\Form\CalculTempsEtAllureType;
 use App\Form\CalculTempsEtVitesseType;
 use App\Form\CalculVitesseEtAllureType;
+use App\Form\CalculDistanceEtAllureType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\ByteString;
+use App\Form\CalculDistanceEtVitesseType;
 use App\Repository\ConvertisseurRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\ConvertisseurAllureToVitesseType;
 use App\Form\ConvertisseurVitesseToAllureType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +37,7 @@ class Convertisseur_Controller extends AbstractController
     {
 
         $c = new Convertisseur();
-        $form = $this->createForm(ConvertisseurType::class, $c);
+        $form = $this->createForm(ConvertisseurAllureToVitesseType::class, $c);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -101,8 +103,8 @@ class Convertisseur_Controller extends AbstractController
         $distance = $form->get('distance')->getData(); 
         $temps = $form->get('temps')->getData(); 
 
-        list($heures ,$minutes, $seconds) = explode(':', $temps);
-        $totalHeure = $heures + ($minutes / 60) + ($seconds /3600);
+
+        $totalHeure = $service->convertisseurTempstoDecimal($temps);
 
                 
         // Calcul de la vitesse en km/h
@@ -179,34 +181,18 @@ class Convertisseur_Controller extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
 
         $distance = $form->get('distance')->getData(); 
-        $allure = $form->get('allure')->getData(); 
-
-        list($minutes, $seconds) = explode(':', $allure);
-
+        $allure = $form->get('allure')->getData();
         
+        $alluredecimal = $service->convertisseurAlluretoDecimal($allure);
 
-        $secondetemp =  ($seconds / 0.6);
-        $secondes = round($secondetemp, 0,PHP_ROUND_HALF_UP);
-
-
-        $totalallure = implode(".",[$minutes , $secondes]);
-
-
-
-        $tempstemp = ($distance * $totalallure / 60);
+        $tempstemp = ($distance * $alluredecimal / 60);
 
         $vitessetemp = $distance/$tempstemp;
 
         $temps = $service->convertisseurTempsenHMS($tempstemp);
 
         $vitesse = round($vitessetemp, 2,PHP_ROUND_HALF_UP);
-
-        
-
-
-        
-
-
+   
 
         $this->em->persist($c);
         $this->em->flush();
@@ -224,6 +210,98 @@ class Convertisseur_Controller extends AbstractController
     ]);
 }
 
+#[Route('/convertisseur6', name: 'app_convertisseur6')]
+    public function calculDistanceEtVitesse(Request $request, Service $service): Response
+    {
+
+    $c = new Convertisseur();
+    $form = $this->createForm(CalculDistanceEtVitesseType::class, $c);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $temps = $form->get('temps')->getData(); 
+        $allure = $form->get('allure')->getData(); 
+
+        $alluredecimal = $service->convertisseurAlluretoDecimal($allure);
+
+        $tempsdecimal = $service->convertisseurTempstoDecimal($temps);
+
+        list($heures, $minutes, $secondes) = explode(":", $temps);
+
+        $nombreDeMinutes = ($heures * 60) + $minutes + ($secondes / 60);
+
+        
+        // Calcul de la distance en kilomètres
+        $distancetemp = ($nombreDeMinutes / $alluredecimal);
+        $distance = round($distancetemp, 2,PHP_ROUND_HALF_UP);
+
+
+        // Calcul de la vitesse en km/h
+        $vitessetemp = $distance / $tempsdecimal;
+
+        $vitesse = round($vitessetemp, 2,PHP_ROUND_HALF_UP);
+
+   
+
+        $this->em->persist($c);
+        $this->em->flush();
+        
+        return $this->render('convertisseur6/resultat.html.twig', [
+            'distance' => $distance,
+            'temps' => $temps,
+            'vitesse' => $vitesse,
+            'allure' => $allure,
+        ]);
+    }
+
+    return $this->render('convertisseur6/index.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
+#[Route('/convertisseur7', name: 'app_convertisseur7')]
+    public function calculDistanceEtAllure(Request $request, Service $service): Response
+    {
+
+    $c = new Convertisseur();
+    $form = $this->createForm(CalculDistanceEtAllureType::class, $c);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $temps = $form->get('temps')->getData(); 
+        $vitesse = $form->get('vitesse')->getData(); 
+
+        $tempsdecimal = $service->convertisseurTempstoDecimal($temps);
+
+        
+        // Calcul de la distance en kilomètres
+        $distancetemp = ($tempsdecimal * $vitesse);
+        $distance = round($distancetemp, 2,PHP_ROUND_HALF_UP);
+
+
+        // Calcul de l'allure en min/km
+        //$allure = ($tempsdecimal * 60) / $distance;
+        $allure = $service->convertisseurVitessetoAllure($vitesse);
+
+   
+
+        $this->em->persist($c);
+        $this->em->flush();
+        
+        return $this->render('convertisseur7/resultat.html.twig', [
+            'distance' => $distance,
+            'temps' => $temps,
+            'vitesse' => $vitesse,
+            'allure' => $allure,
+        ]);
+    }
+
+    return $this->render('convertisseur7/index.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
 
 
 

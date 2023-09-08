@@ -125,13 +125,31 @@ class Service extends AbstractController
 
     }
 
-    public function convertisseurAllure($allure)
+    public function convertisseurAlluretoDecimal($allure)
 
     {
+
+        list($minutes, $seconds) = explode(':', $allure);
+
+        $secondetemp =  ($seconds / 0.6);
+        
+        $secondes = round($secondetemp, 0,PHP_ROUND_HALF_UP);
+
+        $totalallure = implode(".",[$minutes , $secondes]);
+
+        return $totalallure;
     }
 
-   
+    public function convertisseurTempstoDecimal($temps)
 
+    {
+
+        list($heures ,$minutes, $seconds) = explode(':', $temps);  
+        $totalHeure = $heures + ($minutes / 60) + ($seconds /3600);
+
+        return $totalHeure;
+    
+    }
 
 
 }

@@ -6,16 +6,17 @@ use App\Entity\Convertisseur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ConvertisseurType extends AbstractType
+class CalculDistanceEtVitesseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('allure')            
-            ->add('Convertir',SubmitType::class)
+            ->add('temps')
+            ->add('allure')
+            ->add('Calculer',SubmitType::class)
+
         ;
     }
 
