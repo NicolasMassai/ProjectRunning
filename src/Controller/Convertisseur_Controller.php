@@ -30,7 +30,19 @@ class Convertisseur_Controller extends AbstractController
     {
         $this->convertRepository = $convertRepository;
         $this->em = $em;
-    }    
+    }
+
+
+    #[Route('/convertisseur/menu', name: 'app_convertisseur_menu')]
+    public function affichage(): Response
+    {
+
+        return $this->render('convertisseur_menu/index.html.twig', [
+            'convertisseur' => 'affichage',
+        ]);
+
+       
+    }
 
     #[Route('/convertisseur', name: 'app_convertisseur')]
     public function convert(Request $request, Service $service): Response

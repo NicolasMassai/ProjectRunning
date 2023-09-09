@@ -19,7 +19,6 @@ class HomeController extends AbstractController
 
     #[Route('/home', name: 'app_home')]
     #[IsGranted("ROLE_USER")]
-
     public function index(): Response
     {
        
