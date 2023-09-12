@@ -31,8 +31,28 @@ class CommandeRepository extends ServiceEntityRepository
                                     JOIN App\Entity\Commande c 
                                     WITH d.commande=c.id
                                     JOIN App\Entity\Produit p
-                                    WITH d.produit=p.id   
-                                    WHERE c.user =  ' . $x . '');
+                                    WITH d.produit=p.id
+                                    WHERE c.user = '. $x .'
+                                    order by c.id asc');
+    
+        $result = $query->getResult();
+        //dd($result);
+        
+        return $result;
+    }
+
+
+    public function requete3(int $x){
+    
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery('SELECT (d.prix * d.quantite) as total
+                                    FROM App\Entity\DetailCommande d 
+                                    JOIN App\Entity\Commande c 
+                                    WITH d.commande=c.id
+                                    JOIN App\Entity\Produit p
+                                    WITH d.produit=p.id
+                                    WHERE c.id = '.$x.'');
     
         $result = $query->getResult();
         //dd($result);

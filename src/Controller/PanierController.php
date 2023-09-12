@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\Produit;
+use App\Form\Bank2Type;
 use App\Service\Service;
 use App\Repository\UserRepository;
 use App\Repository\PanierRepository;
@@ -13,6 +14,8 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Notifier\NotifierInterface;
+use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -20,6 +23,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/panier', name: 'app_panier_')]
 class PanierController extends AbstractController
 {
+
+
+    private EntityManagerInterface $em;
+    private UserRepository $userRepository;
+
+    
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
+    {
+        $this->userRepository = $userRepository;
+        $this->em = $em;
+    }
 
     #[Route('/', name: 'index')]
     public function index(SessionInterface $session, ProduitRepository $produitrepository)
@@ -40,8 +54,10 @@ class PanierController extends AbstractController
             $total += $produit->getPrix() * $quantity;
         }
 
+
         return $this->render('panier/index.html.twig', compact('data', 'total'));
     
+        
     }
 
 
@@ -116,42 +132,52 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_panier_index');
     }
 
-/*
-    #[Route('/panier/ajout/{produit}', name: 'app_panier_ajout')]
-    public function ajouterProduit(Produit $produit, ProduitRepository $produitrepository): Response
-    { 
-            // Récupére le produit à partir de la base de donnée
-            $id = $produit->getId();
+    #[Route('/buy', name: 'buy')]
+    public function buy(SessionInterface $session, ProduitRepository $produitrepository,Request $request, NotifierInterface $notifier)
+    {
+        $panier = $session->get('panier', []);
 
-            $produit = $produitrepository->requete($id);  
+        // On initialise des variables
+        $data = [];
+        $total = 0;
 
-            if (!$produit) {
-                throw $this->createNotFoundException('Le produit n\'existe pas.');
-            }
+        foreach($panier as $id => $quantity){
+            $produit = $produitrepository->find($id);
 
-        $this->panierService->ajouterProduit($produit);
+            $data[] = [
+                'produit' => $produit,
+                'quantity' => $quantity
+            ];
+            $total += $produit->getPrix() * $quantity;
+        }
 
-        return $this->redirectToRoute('app_panier');
-        
+
+        $user = $this->userRepository->find($this->getUser());
+        $account = $user->getBank()->getAccount();
+        if ($account<$total){
+            $notifier->send(new Notification('Solde insuffisant', ['browser']));
+            return $this->redirectToRoute('app_bank_create');
+
+        }
+        else{
+        $user->getBank()->setAccount(-$total);
+        $form = $this->createForm(Bank2Type::class, $user->getBank());
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+                $user->getBank()->setAccount($user->getBank()->getAccount() + $account);
+                $this->em->persist($user);
+                $this->em->flush();
+
+                return $this->redirectToRoute('app_commandes_add');
+        }
+
+     
+        return $this->render('bank/buy.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }    
     }
 
-    #[Route('/panier/supprime/{produit}', name: 'app_panier_supprime')]
-    public function supprimerProduit(Produit $produit, ProduitRepository $produitrepository): Response
-    { 
-            // Récupére le produit à partir de la base de donnée
-            $id = $produit->getId();
-
-            $produit = $produitrepository->requete($id);  
-
-            if (!$produit) {
-                throw $this->createNotFoundException('Le produit n\'existe pas.');
-            }
-            
-        $this->panierService->supprimerProduit($produit);
-
-        return $this->redirectToRoute('app_panier');
-        
-    }   
-*/
    
 }
