@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -33,8 +35,24 @@ class Produit
     #[ORM\JoinColumn(nullable: false)]
     private ?CategorieProduit $categorie = null;
 
-    #[ORM\OneToOne(mappedBy: 'produit', cascade: ['persist', 'remove'])]
-    private ?DetailCommande $detailCommande = null;
+    
+
+    #[ORM\Column]
+    private ?int $quantite = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produit')]
+    private ?Panier $panier = null;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: DetailCommande::class)]
+    private Collection $detailCommandes;
+
+
+    public function __construct()
+    {
+        $this->detailCommandes = new ArrayCollection();
+    }
+
+   
 
     public function getId(): ?int
     {
@@ -113,20 +131,62 @@ class Produit
         return $this;
     }
 
-    public function getDetailCommande(): ?DetailCommande
+    
+
+    public function getQuantite(): ?int
     {
-        return $this->detailCommande;
+        return $this->quantite;
     }
 
-    public function setDetailCommande(DetailCommande $detailCommande): static
+    public function setQuantite(int $quantite): static
     {
-        // set the owning side of the relation if necessary
-        if ($detailCommande->getProduit() !== $this) {
-            $detailCommande->setProduit($this);
-        }
-
-        $this->detailCommande = $detailCommande;
+        $this->quantite = $quantite;
 
         return $this;
     }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailCommande>
+     */
+    public function getDetailCommandes(): Collection
+    {
+        return $this->detailCommandes;
+    }
+
+    public function addDetailCommande(DetailCommande $detailCommande): static
+    {
+        if (!$this->detailCommandes->contains($detailCommande)) {
+            $this->detailCommandes->add($detailCommande);
+            $detailCommande->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailCommande(DetailCommande $detailCommande): static
+    {
+        if ($this->detailCommandes->removeElement($detailCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailCommande->getProduit() === $this) {
+                $detailCommande->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+   
 }

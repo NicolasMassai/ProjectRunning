@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Date\Date;
 use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,30 +12,29 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
+
+    use Date;
+
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $statut = null;
-
-    #[ORM\Column]
-    private ?float $montantTotal = null;
+    private ?string $reference = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: DetailCommande::class)]
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: DetailCommande::class,cascade: ['persist'])]
     private Collection $detailCommandes;
 
     public function __construct()
     {
         $this->detailCommandes = new ArrayCollection();
+        $this->date_creation = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -42,41 +42,19 @@ class Commande
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+
+    public function getReference(): ?string
     {
-        return $this->date;
+        return $this->reference;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setReference(string $reference): static
     {
-        $this->date = $date;
+        $this->reference = $reference;
 
         return $this;
     }
 
-    public function getStatut(): ?string
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(string $statut): static
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-    public function getMontantTotal(): ?float
-    {
-        return $this->montantTotal;
-    }
-
-    public function setMontantTotal(float $montantTotal): static
-    {
-        $this->montantTotal = $montantTotal;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {

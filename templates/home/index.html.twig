@@ -22,7 +22,17 @@
         <ul>
             <a href="{{ path('app_bank') }}">Solde</a>
         </ul>
+        <ul>
+            <a href="{{ path('app_panier_index') }}">Panier</a>
+        </ul>
     </nav>
+    {% for type, messages in app.flashes %}
+    <div class="alert alert-{{ type }}">
+        {% for message in messages %}
+            {{ message|raw }}
+        {% endfor %}
+    </div>
+{% endfor %}
 
 
 

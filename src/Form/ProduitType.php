@@ -19,6 +19,7 @@ class ProduitType extends AbstractType
             ->add('couleur')
             ->add('prix')
             ->add('categorie')
+            ->add('quantite')
             ->add('Ajouter',SubmitType::class)
 
         ;

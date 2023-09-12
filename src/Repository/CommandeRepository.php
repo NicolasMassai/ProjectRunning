@@ -21,6 +21,25 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
+    
+    public function requete(int $x){
+    
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery('SELECT c.id, p.nom, d.quantite , d.prix , (d.prix * d.quantite) as total
+                                    FROM App\Entity\DetailCommande d 
+                                    JOIN App\Entity\Commande c 
+                                    WITH d.commande=c.id
+                                    JOIN App\Entity\Produit p
+                                    WITH d.produit=p.id   
+                                    WHERE c.user =  ' . $x . '');
+    
+        $result = $query->getResult();
+        //dd($result);
+        
+        return $result;
+    }
+
 //    /**
 //     * @return Commande[] Returns an array of Commande objects
 //     */

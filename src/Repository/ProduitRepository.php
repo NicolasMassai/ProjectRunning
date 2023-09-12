@@ -34,6 +34,8 @@ class ProduitRepository extends ServiceEntityRepository
         return $result;
     }
 
+    
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

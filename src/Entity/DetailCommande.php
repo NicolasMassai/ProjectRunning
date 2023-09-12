@@ -17,18 +17,17 @@ class DetailCommande
     private ?int $quantite = null;
 
     #[ORM\Column]
-    private ?float $prix_unitaire = null;
+    private ?float $prix = null;
 
-    #[ORM\Column]
-    private ?float $sous_total = null;
 
     #[ORM\ManyToOne(inversedBy: 'detailCommandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commande $commande = null;
 
-    #[ORM\OneToOne(inversedBy: 'detailCommande', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'detailCommandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
+
 
 
     public function getId(): ?int
@@ -48,26 +47,14 @@ class DetailCommande
         return $this;
     }
 
-    public function getPrixUnitaire(): ?float
+    public function getPrix(): ?float
     {
-        return $this->prix_unitaire;
+        return $this->prix;
     }
 
-    public function setPrixUnitaire(float $prix_unitaire): static
+    public function setPrix(float $prix): static
     {
-        $this->prix_unitaire = $prix_unitaire;
-
-        return $this;
-    }
-
-    public function getSousTotal(): ?float
-    {
-        return $this->sous_total;
-    }
-
-    public function setSousTotal(float $sous_total): static
-    {
-        $this->sous_total = $sous_total;
+        $this->prix = $prix;
 
         return $this;
     }
@@ -89,11 +76,13 @@ class DetailCommande
         return $this->produit;
     }
 
-    public function setProduit(Produit $produit): static
+    public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
 
         return $this;
     }
+
+    
 
 }

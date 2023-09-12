@@ -96,7 +96,7 @@ class ProduitController extends AbstractController
 
     #[Route('/produit/buy/{produit}', name: 'app_produit_buy')]
    #[IsGranted("ROLE_USER")]
-   public function buy(Produit $produit, ProduitRepository $produitrepository, Request $request, NotifierInterface $notifier,): Response
+   public function buy(Produit $produit, ProduitRepository $produitrepository, Request $request, NotifierInterface $notifier): Response
    {
         $id = $produit->getId();
         $produit = $produitrepository->requete($id);

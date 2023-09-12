@@ -30,6 +30,7 @@
             <form action="{{ path('app_produit_buy', {"produit": produit.id}) }}" method="post">
                 <button type="submit" class="btn btn-outline-primary btn-sm">Acheter</button>
             </form>
+            <a href="{{ path('app_panier_add', {id: produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
             <br>
         </ul>
 
