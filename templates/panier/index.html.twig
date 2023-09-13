@@ -45,6 +45,11 @@
                     </tfoot>
                 </table>
                 <a href="{{ path('app_panier_buy') }}" class="btn btn-primary">Valider le panier</a>
+                    {% for message in app.flashes('notification') %}
+                        <div class="alert alert-info alert-dismissible fade show">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
             </div>
         </section>
     </main>

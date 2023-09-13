@@ -93,7 +93,7 @@ class ProduitController extends AbstractController
         return $form;
     }
 
-
+/*
     #[Route('/produit/buy/{produit}', name: 'app_produit_buy')]
    #[IsGranted("ROLE_USER")]
    public function buy(Produit $produit, ProduitRepository $produitrepository, Request $request, NotifierInterface $notifier): Response
@@ -128,5 +128,5 @@ class ProduitController extends AbstractController
         ]);
     }
    }
-
+*/
 }

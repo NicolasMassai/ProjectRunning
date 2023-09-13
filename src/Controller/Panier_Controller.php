@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\AST\QuantifiedExpression;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
   
 #[Route('/panier', name: 'app_panier_')]
-class PanierController extends AbstractController
+class Panier_Controller extends AbstractController
 {
 
 
@@ -66,16 +67,15 @@ class PanierController extends AbstractController
     {
 
         $id = $produit->getId();
-
         $panier = $session->get('panier', []);
 
-    if(empty($panier[$id])){
-        $panier[$id] = 1;}
-        else{
-            $panier[$id]++;
-        }
-    
-        $session->set('panier', $panier);
+            if(empty($panier[$id])){
+                $panier[$id] = 1;}
+            else{
+                $panier[$id]++;
+            }
+
+            $session->set('panier', $panier);
 
         return $this->redirectToRoute('app_panier_index');
     }
@@ -149,9 +149,26 @@ class PanierController extends AbstractController
                 'quantity' => $quantity
             ];
             $total += $produit->getPrix() * $quantity;
+
+            if ($produit->getQuantite() <= 0){
+                $this->addFlash('message', 'plus de stock');
+            return $this->redirectToRoute('app_home');
+                
+            }
+            
+            $p = $produit->setQuantite(($produit->getQuantite() - $quantity));
+            //dd($p);
+            
+          /*  $this->em->persist($p);
+            $this->em->flush();*/
         }
-
-
+        if($panier === []){
+            
+            $this->addFlash('message', 'Votre panier est vide');
+            return $this->redirectToRoute('app_home');
+        }
+     
+        
         $user = $this->userRepository->find($this->getUser());
         $account = $user->getBank()->getAccount();
         if ($account<$total){
@@ -166,6 +183,7 @@ class PanierController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
                 $user->getBank()->setAccount($user->getBank()->getAccount() + $account);
+                $this->em->persist($p);
                 $this->em->persist($user);
                 $this->em->flush();
 
