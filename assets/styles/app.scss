@@ -1,0 +1,26 @@
+
+body {
+    background-color: rgb(255, 255, 250);
+}
+
+.bouton {
+
+
+  li{
+    margin: 0;   
+  }
+
+  button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

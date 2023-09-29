@@ -10,18 +10,11 @@
 
 <div class="example-wrapper">
 
-    <ul>
-        <form action="{{ path('app_produit_chaussure') }}" method="post">
-            <button type="submit" class="btn btn-outline-secondary btn-sm">Chaussure</button>
-        </form>
-        <br>
-    </ul>
-     <ul>
-        <form action="{{ path('app_produit_montre') }}" method="post">
-            <button type="submit" class="btn btn-outline-secondary btn-sm">Montre</button>
-        </form>
-        <br>
-    </ul>
+        <div {{ react_component('btn_chaussure', { 'button': 'Chaussure'}) }}></div>
+        <div {{ react_component('btn_montre', { 'button': 'Montre'}) }}></div>
+        
+
+
 
 </div>
 {% endblock %}

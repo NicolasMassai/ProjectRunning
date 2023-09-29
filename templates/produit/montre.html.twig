@@ -10,38 +10,7 @@
 
 <div class="example-wrapper">
 
-<h1>Montre</h1>
-
-
-{% for produit in produits %}
-        <ul>
-            <li>Nom : {{produit.nom}}</li>
-            <li>Categorie : {{produit.categorie}}</li>
-            <li>Description : {{produit.description}}</li>
-            <li>Prix : {{produit.prix}} €</li>
-            <li>Taille : {{produit.taille}}</li>
-            <li>Couleur : {{produit.couleur}}</li>
-            {% if produit.quantite > 1 %}
-                <p>En Stock , <small>Il reste {{produit.quantite}} exemplaires</small></p>
-            {% elseif produit.quantite == 1 %}
-                <p>En Stock , <small>Il reste {{produit.quantite}} exemplaire</small></p>
-            {% else %}
-                <p>En Rupture de Stock</p>
-            {% endif %}
-            <br>
-        </ul>
-        <ul>
-            <form action="{{ path('app_produit_id', {"produit": produit.id}) }}" method="post">
-                <button type="submit" class="btn btn-outline-secondary btn-sm">Afficher Détails</button>
-            </form>
-            {% if produit.quantite > 0%}
-            <a href="{{ path('app_panier_add', {id: produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
-            {% else %}
-            {% endif %}
-            <br>
-        </ul>
-
-{% endfor %}
+<div {{ react_component('montre', { 'button': 'Ajouter au Panier'}) }}></div>
 
 </div>
 {% endblock %}
