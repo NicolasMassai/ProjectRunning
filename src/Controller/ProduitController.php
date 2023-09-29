@@ -59,6 +59,7 @@ class ProduitController extends AbstractController
                 'couleur' => $product->getCouleur(),
                 'taille' => $product->getTaille(),
                 'quantite' => $product->getQuantite(),
+                'image' => $product->getImage()
             ];
         }
         return $this->json($produits, 200);
@@ -95,7 +96,7 @@ class ProduitController extends AbstractController
         return $this->json($produits, 200);
     }
 
-    #[Route('/produit/montre', name: 'montre')]
+    #[Route('/produit/montre', name: 'app_produit_montre')]
     public function montre(): Response
     {
         
