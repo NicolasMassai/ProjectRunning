@@ -28,4 +28,78 @@ body {
 img {
     display: block;
     width: 40%;
+    margin: auto;
   }
+
+.article-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #c1c1c1;
+  border-radius: 15px;
+  box-shadow: 10px 5px 8px rgba(0,0,0,.1);
+  text-align: center;
+  }
+
+
+
+.nom{
+    text-transform : capitalize;
+  }
+
+  ::marker {
+    font-size: 0em;
+  }
+  
+
+/* Pseudo-élément pour créer la flèche */
+.precedent::after {
+  content: '\2190'; /* Code unicode pour la flèche vers la droite */
+  font-size: 60px;
+  display: inline-block;}
+
+/* Effet de survol */
+.precedent:hover {
+  background-color: #2980b9;
+}
+
+/* Effet de survol pour la flèche */
+.precedent:hover::after {
+  margin: 5px;
+}
+
+
+/* Pseudo-élément pour créer la flèche */
+.suivant::after {
+  content: '\2192'; /* Code unicode pour la flèche vers la droite */
+  font-size: 60px;
+  display: inline-block;}
+
+/* Effet de survol */
+.suivant:hover {
+  background-color: #2980b9;
+}
+
+/* Effet de survol pour la flèche */
+.suivant:hover::after {
+  margin: 5px;
+}
+
+.bloc {
+  display: flex;
+  justify-content: space-between; /* Les éléments sont placés de chaque côté du conteneur */
+  align-items: center; /* Aligner les éléments verticalement au centre */
+  padding: 10px; /* Ajoutez un peu d'espace autour des boutons et du bloc */
+}
+
+.precedent, .suivant {
+  padding: 10px 10px;
+  background-color: #3498db;
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+

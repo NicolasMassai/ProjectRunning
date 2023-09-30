@@ -91,6 +91,8 @@ class ProduitController extends AbstractController
                 'couleur' => $product->getCouleur(),
                 'taille' => $product->getTaille(),
                 'quantite' => $product->getQuantite(),
+                'image' => $product->getImage()
+
             ];
         }
         return $this->json($produits, 200);
