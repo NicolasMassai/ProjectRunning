@@ -37,6 +37,14 @@ class Panier_Controller extends AbstractController
     }
 
     #[Route('/', name: 'index')]
+    public function montre(): Response
+    {
+        
+        return $this->render('panier/panier.html.twig', [
+        ]);
+    }
+
+    #[Route('/2', name: 'index2')]
     public function index(SessionInterface $session, ProduitRepository $produitrepository)
     {
         $panier = $session->get('panier', []);
@@ -49,15 +57,19 @@ class Panier_Controller extends AbstractController
             $produit = $produitrepository->find($id);
 
             $data[] = [
-                'produit' => $produit,
+                'id' => $produit->getId(),
+                'nom' => $produit->getNom(),
+                'prix' => $produit->getPrix(),
                 'quantity' => $quantity
             ];
             $total += $produit->getPrix() * $quantity;
+
         }
 
+        return  $this->json($data, 200);
+        
+        //return  $this->render('panier/index.html.twig', compact('data', 'total'));
 
-        return $this->render('panier/index.html.twig', compact('data', 'total'));
-    
         
     }
 
@@ -157,6 +169,7 @@ class Panier_Controller extends AbstractController
             }
             
             $p = $produit->setQuantite(($produit->getQuantite() - $quantity));
+            
             //dd($p);
             
           /*  $this->em->persist($p);

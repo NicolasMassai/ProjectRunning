@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProduitController!{% endblock %}
+{% block title %}Hello !{% endblock %}
 
 {% block body %}
 <style>
@@ -8,8 +8,13 @@
 </style>
 
 <div class="example-wrapper">
+         
+<div {{ react_component('panier', { 'button': '+'}) }}></div>
 
-<div {{ react_component('montre', { 'button': 'Ajouter au Panier'}) }}></div>
+
+
+
 
 </div>
+  
 {% endblock %}

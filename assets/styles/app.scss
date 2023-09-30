@@ -5,12 +5,6 @@ body {
 
 .bouton {
 
-
-  li{
-    margin: 0;   
-  }
-
-  button{
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -23,7 +17,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
   }
-}
+
 
 img {
     display: block;
@@ -52,44 +46,32 @@ img {
   }
   
 
-/* Pseudo-élément pour créer la flèche */
 .precedent::after {
-  content: '\2190'; /* Code unicode pour la flèche vers la droite */
+  content: '\2190'; /* Code unicode pour la flèche vers la gauche */
   font-size: 60px;
   display: inline-block;}
 
-/* Effet de survol */
-.precedent:hover {
-  background-color: #2980b9;
-}
 
-/* Effet de survol pour la flèche */
 .precedent:hover::after {
-  margin: 5px;
+  margin: 1px;
 }
 
 
-/* Pseudo-élément pour créer la flèche */
 .suivant::after {
   content: '\2192'; /* Code unicode pour la flèche vers la droite */
   font-size: 60px;
   display: inline-block;}
 
-/* Effet de survol */
-.suivant:hover {
-  background-color: #2980b9;
-}
 
-/* Effet de survol pour la flèche */
 .suivant:hover::after {
-  margin: 5px;
+  margin: 1px;
 }
 
 .bloc {
   display: flex;
-  justify-content: space-between; /* Les éléments sont placés de chaque côté du conteneur */
-  align-items: center; /* Aligner les éléments verticalement au centre */
-  padding: 10px; /* Ajoutez un peu d'espace autour des boutons et du bloc */
+  justify-content: space-between;
+  align-items: center; 
+  padding: 10px; 
 }
 
 .precedent, .suivant {

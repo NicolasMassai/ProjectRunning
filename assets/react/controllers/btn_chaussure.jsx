@@ -10,11 +10,8 @@ export default function btn_chaussure(props) {
 
     return (
 
-
-    <div className='bouton'>
-        <button type="button" onClick={bouton}>
+        <button className='bouton' type="button" onClick={bouton}>
             {props.button}
         </button>
-    </div>
     );
 }

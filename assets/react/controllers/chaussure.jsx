@@ -40,7 +40,7 @@ export default function (props) {
 
                 <div className="article-container">
                 {  produit.length > 0  && (
-                    <ul>
+                    <>
                             <li key={currentproduit.id}>
                                 <h1 className='nom'>{currentproduit.nom}</h1>
                                 <img src={currentproduit.image} />
@@ -49,22 +49,22 @@ export default function (props) {
                                 <h3>Couleur : {currentproduit.couleur}</h3>
                                 <h3>Taille : {currentproduit.taille}</h3>
                                 {currentproduit.quantite > 0 ? (
-                                    <div className='bouton'>
+                                    <div>
                                         <h3>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</h3> 
-                                        <button type="button" onClick={(e) => bouton(currentproduit.id,e)}>
+                                        <button className = 'bouton' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
                                             {props.button}
                                         </button>
                                     </div>
                                     ) : (
                                         <h3>En rupture de stock</h3> 
                                     )}
-                                    
+
                                 <span>{currentPage + 1} / {produit.length}</span>
 
                                 
                             </li>
                         
-                    </ul>
+                    </>
                     
                 )}
                 </div>
