@@ -10,18 +10,20 @@ use App\Repository\UserRepository;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\AST\QuantifiedExpression;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\Query\AST\QuantifiedExpression;
 use Symfony\Component\Notifier\NotifierInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
   
 #[Route('/panier', name: 'app_panier_')]
+#[IsGranted('ROLE_USER')]
 class Panier_Controller extends AbstractController
 {
 

@@ -31,6 +31,9 @@ export default function (props) {
     function boutonempty() {
         window.location.href = `/panier/empty`;    
     }
+    function boutonbuy() {
+        window.location.href = `/panier/buy`;    
+    }
 
 
     
@@ -90,10 +93,11 @@ export default function (props) {
 
                 </tfoot>
 
-
-
-
-            </table>
+                </table>
+                
+                <button type="button" onClick={(boutonbuy)}>
+                    Acheter
+                </button>
         </div>
         
     );

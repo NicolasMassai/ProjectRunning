@@ -7,6 +7,7 @@ use App\Form\Bank2Type;
 use App\Service\Service;
 use App\Form\ProduitType;
 use App\Entity\CategorieProduit;
+use App\Entity\User;
 use App\Form\CategorieProduitType;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
@@ -15,12 +16,12 @@ use Symfony\Component\String\ByteString;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ProduitController extends AbstractController
+
+#[IsGranted('ROLE_USER')]
+class Produit_Controller extends AbstractController
 {
 
     
@@ -35,12 +36,11 @@ class ProduitController extends AbstractController
     }
     
     #[Route('/produit', name: 'app_produit')]
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(): Response
     {
-        $produit = $produitRepository->findAll();
 
         return $this->render('produit/index.html.twig', [
-            'produits' => $produit
+            'produits' => 'produit'
         ]);
     }
 
@@ -48,6 +48,8 @@ class ProduitController extends AbstractController
     public function chaussure2(ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->findBy(['categorie' => 1]);
+
+        $user = $this->userRepository->find($this->getUser());
 
         $produits = [];
         foreach ($produit as $product) {
@@ -59,8 +61,10 @@ class ProduitController extends AbstractController
                 'couleur' => $product->getCouleur(),
                 'taille' => $product->getTaille(),
                 'quantite' => $product->getQuantite(),
-                'image' => $product->getImage()
+                'image' => $product->getImage(),
+                'role' => current($user->getRoles())
             ];
+        
         }
         return $this->json($produits, 200);
     }
@@ -81,6 +85,8 @@ class ProduitController extends AbstractController
     {
         $produit = $produitRepository->findBy(['categorie' => 2]);
 
+        $user = $this->userRepository->find($this->getUser());
+
         $produits = [];
         foreach ($produit as $product) {
             $produits[] = [
@@ -91,8 +97,8 @@ class ProduitController extends AbstractController
                 'couleur' => $product->getCouleur(),
                 'taille' => $product->getTaille(),
                 'quantite' => $product->getQuantite(),
-                'image' => $product->getImage()
-
+                'image' => $product->getImage(),
+                'role' => current($user->getRoles())
             ];
         }
         return $this->json($produits, 200);
@@ -109,7 +115,6 @@ class ProduitController extends AbstractController
 
 
     #[Route('/produit/find/{produit}', name: 'app_produit_id')]
-    #[IsGranted('ROLE_USER')]
     public function getId(Produit $produit, ProduitRepository $produitrepository): Response
     {
 
@@ -136,40 +141,22 @@ class ProduitController extends AbstractController
         return $form;
     }
 
-/*
-    #[Route('/produit/buy/{produit}', name: 'app_produit_buy')]
-   #[IsGranted("ROLE_USER")]
-   public function buy(Produit $produit, ProduitRepository $produitrepository, Request $request, NotifierInterface $notifier): Response
-   {
-        $id = $produit->getId();
-        $produit = $produitrepository->requete($id);
+    #[Route('/produit/update/{produit}', name: 'app_produit_update')]
+    #[IsGranted("ROLE_ADMIN")]
 
-        $user = $this->userRepository->find($this->getUser());
-        $account = $user->getBank()->getAccount();
-        $prix=($produit[0]->getPrix());
-        if ($account<$prix){
-            $notifier->send(new Notification('Solde insuffisant', ['browser']));
-            return $this->redirectToRoute('app_bank_create');
 
-        }
-        else{
-        $user->getBank()->setAccount(-$prix);
-        $form = $this->createForm(Bank2Type::class, $user->getBank());
+    public function update(Produit $produit, Request $request): Response
+    { 
+        $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-                $user->getBank()->setAccount($user->getBank()->getAccount() + $account);
-                $this->em->persist($user);
-                $this->em->flush();
-
-                return $this->redirectToRoute('app_home');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($produit);  
+            $this->em->flush();
+            return $this->redirectToRoute('app_produit');
         }
-
-     
-        return $this->render('bank/buy.html.twig', [
+        return $this->render('produit/create.html.twig', [
             'form' => $form->createView()
         ]);
     }
-   }
-*/
+
 }

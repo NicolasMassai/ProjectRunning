@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[IsGranted('ROLE_USER')]
 class BankController extends AbstractController
 {
    
@@ -25,7 +26,6 @@ class BankController extends AbstractController
     }
 
     #[Route('/bank', name: 'app_bank')]
-    #[IsGranted("ROLE_USER")]
     public function index(): Response
     {
 
@@ -37,7 +37,6 @@ class BankController extends AbstractController
     }
 
     #[Route('/bank/create', name: 'app_bank_create')]
-    #[IsGranted("ROLE_USER")]
     public function create(Request $request): Response
     {       
         

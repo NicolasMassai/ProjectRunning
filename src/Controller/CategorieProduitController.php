@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategorieProduitController extends AbstractController
 {
     #[Route('/categorie_produit', name: 'app_categorie_produit')]
+    #[IsGranted('ROLE_USER')]
     public function index(CategorieProduitRepository $categorieProduitRepository): Response
     {
         $categorie = $categorieProduitRepository->findAll();

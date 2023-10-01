@@ -155,7 +155,7 @@ class Service extends AbstractController
     
     }
 
- 
+ /*
     public function ajouterProduit(Panier $panier, Produit $produit)
     {
         $panierProduits = $panier->getProduit();
@@ -185,7 +185,7 @@ class Service extends AbstractController
         $this->em->persist($panier);
         $this->em->flush();
        
-    }/*
+    }
 
     public function supprimerProduit(Produit $produit)
     {

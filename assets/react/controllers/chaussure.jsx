@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import image from './chaussure2.jpg'
+import image from './chaussure1.jpg'
 
 
 export default function (props) {
@@ -19,6 +19,14 @@ export default function (props) {
     
     function bouton(id) {
         window.location.href = `/panier/add/${id}`;    
+    }
+
+    function update(id) {
+        window.location.href = `/produit/find/${id}`;    
+    }
+
+    function create() {
+        window.location.href = `/produit/create`;    
     }
 
 
@@ -47,17 +55,27 @@ export default function (props) {
                                 <h3>Description : {currentproduit.description}</h3>
                                 <h3>Prix : {currentproduit.prix} €</h3>
                                 <h3>Couleur : {currentproduit.couleur}</h3>
-                                <h3>Taille : {currentproduit.taille}</h3>
+                                <h3>Taille : {currentproduit.role}</h3>
                                 {currentproduit.quantite > 0 ? (
                                     <div>
                                         <h3>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</h3> 
-                                        <button className = 'bouton' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
+                                        {currentproduit.role === 'ROLE_USER' && <button className = 'bouton' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
                                             {props.button}
-                                        </button>
+                                        </button>}
                                     </div>
                                     ) : (
                                         <h3>En rupture de stock</h3> 
-                                    )}
+                                    )
+                                }
+                                <div>
+                                {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(e) => update(currentproduit.id,e)}>
+                                    Modifier le produit
+                                </button>}
+
+                                {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(create)}>
+                                    Créer un produit
+                                </button>}
+                                </div>
 
                                 <span>{currentPage + 1} / {produit.length}</span>
 
