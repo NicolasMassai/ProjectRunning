@@ -62,7 +62,8 @@ class Panier_Controller extends AbstractController
                 'id' => $produit->getId(),
                 'nom' => $produit->getNom(),
                 'prix' => $produit->getPrix(),
-                'quantity' => $quantity
+                'quantity' => $quantity,
+                'image'=>$produit->getImage()
             ];
             $total += $produit->getPrix() * $quantity;
 

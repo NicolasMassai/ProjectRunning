@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import image from './chaussure1.jpg'
 
-export default function (props) {
+
+export default function panier(props) {
 
 
     const [produits, setProduit] = useState([]);  
-    const [currentPage, setCurrentPage] = useState(0);
+
 
     useEffect(() => {
     fetch('https://127.0.0.1:8000/panier/2', {method : 'GET'})
@@ -37,10 +39,34 @@ export default function (props) {
 
 
     
+    const ajouterNouvelleValeur = () => {
 
+        const nouveauTableau = [...produits];
+        
+        const tableau = nouveauTableau.map((produit, index) => {
+            if (index === nouveauTableau.length - 1) {
+                nouveauTableau.push(produit.quantity * produit.prix);
+            return produit.quantity * produit.prix;
+            }
+  
+        return produit.quantity * produit.prix;
+      });
+
+        const somme = tableau.reduce((acc, valeur) => acc + valeur, 0);
+        window.maVariableGlobale = somme;
+    }
+    ajouterNouvelleValeur();
+
+    useEffect(() => {
+        ajouterNouvelleValeur();
+      }, [boutonadd]);
+
+    
     return (
-        <div>
-            <h1>Panier</h1>
+        <div className='panier'>
+            <h1 className='PanierTitre'>Panier</h1>
+            {maVariableGlobale != 0 ? (
+
             <table>
                 <thead>
                     <tr>
@@ -52,22 +78,21 @@ export default function (props) {
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {produits.map(produit => (
                             <tr>
-                                <td>{produit.nom}</td>
+                                <td className="panierNom">{produit.nom}
+                                <img className = 'panierImage'src={produit.image} /></td>
                                 <td>{produit.prix} €</td>
                                 <td>{produit.quantity}</td>
-                                <td>{produit.quantity * produit.prix}€</td>
-                                
-                                <td>
-                                    <button type="button" onClick={(e) => boutonadd(produit.id,e)}>
-                                        {props.button}
+                                <td>{produit.quantity * produit.prix}€</td>                                
+                                <td className='action'>
+                                    <button className ='add' type="button" onClick={(e) => boutonadd(produit.id,e)}>
                                     </button>
-                                    <button type="button" onClick={(e) => boutonremove(produit.id,e)}>
-                                        -
+                                    <button className ='remove'type="button" onClick={(e) => boutonremove(produit.id,e)}>
+                                        
                                     </button>
-                                    <button type="button" onClick={(e) => boutondelete(produit.id,e)}>
-                                        Supprimer
+                                    <button className ='delete' type="button" onClick={(e) => boutondelete(produit.id,e)}>
                                     </button>
                                 </td>
                             </tr>
@@ -78,26 +103,31 @@ export default function (props) {
 
                 </tbody>
                 <tfoot>
-                    
-                {produits.map(produit => (
-                    <tr>
+                {maVariableGlobale != 0 ? (
+
+                    <tr className='total'>
                         <td colspan="3">Total</td>
-                        <td>{produit.quantity * produit.prix}€</td>
+                        <td>{maVariableGlobale} €</td>
                         <td>
-                            <button type="button" onClick={(boutonempty)}>
-                                        Vider
+                            
+                            <button  className = 'empty' type="button" onClick={(boutonbuy)}>
+                                Acheter
                             </button>
                         </td>
                     </tr>
-                ))}
+                ) : null}
+
 
                 </tfoot>
 
-                </table>
-                
-                <button type="button" onClick={(boutonbuy)}>
-                    Acheter
+            </table>
+            ) : "Le Panier est vide"}
+
+            {maVariableGlobale != 0 ? (
+               <button className = 'empty' type="button" onClick={(boutonempty)}>
+                    Vider 
                 </button>
+            ) : null}
         </div>
         
     );

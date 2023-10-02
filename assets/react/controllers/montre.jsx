@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import image from './montre2.jpg'
+import image from './montre1.jpg'
 
 
 export default function (props) {
