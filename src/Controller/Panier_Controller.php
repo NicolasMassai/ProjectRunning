@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Panier;
 use App\Entity\Produit;
 use App\Form\Bank2Type;
+use App\Entity\Commande;
 use App\Service\Service;
+use App\Entity\DetailCommande;
 use App\Repository\UserRepository;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
@@ -116,17 +118,14 @@ class Panier_Controller extends AbstractController
 
         $session->set('panier', $panier);
         
-        //On redirige vers la page du panier
         return $this->redirectToRoute('app_panier_index');
     }
 
     #[Route('/delete/{id}', name: 'delete')]
     public function delete(Produit $produit, SessionInterface $session)
     {
-        //On récupère l'id du produit
         $id = $produit->getId();
 
-        // On récupère le panier existant
         $panier = $session->get('panier', []);
 
         if(!empty($panier[$id])){
@@ -135,7 +134,6 @@ class Panier_Controller extends AbstractController
 
         $session->set('panier', $panier);
         
-        //On redirige vers la page du panier
         return $this->redirectToRoute('app_panier_index');
     }
 
@@ -152,7 +150,6 @@ class Panier_Controller extends AbstractController
     {
         $panier = $session->get('panier', []);
 
-        // On initialise des variables
         $data = [];
         $total = 0;
 
@@ -171,12 +168,9 @@ class Panier_Controller extends AbstractController
                 
             }
             
-            $p = $produit->setQuantite(($produit->getQuantite() - $quantity));
+            $produitQuantite = $produit->setQuantite(($produit->getQuantite() - $quantity));
             
-            //dd($p);
-            
-          /*  $this->em->persist($p);
-            $this->em->flush();*/
+      
         }
         if($panier === []){
             
@@ -199,11 +193,44 @@ class Panier_Controller extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
                 $user->getBank()->setAccount($user->getBank()->getAccount() + $account);
-                $this->em->persist($p);
+                $this->em->persist($produitQuantite);
                 $this->em->persist($user);
                 $this->em->flush();
 
-                return $this->redirectToRoute('app_commandes_add');
+                    //return $this->redirectToRoute('app_commandes_add');
+                    
+                    //Le panier n'est pas vide, on crée la commande
+                    $commande = new Commande();
+
+                    // On remplit la commande
+                    $commande->setUser($this->getUser());
+                    $commande->setReference(uniqid());
+
+                    // On parcourt le panier pour créer les détails de commande
+                    foreach($panier as $item => $quantity){
+                        $commandeDetails = new DetailCommande();
+
+                        // On va chercher le produit
+                        $product = $produitrepository->find($item);
+                        
+                        $price = $product->getPrix();
+
+                        // On crée le détail de commande
+                        $commandeDetails->setProduit($product);
+                        $commandeDetails->setPrix($price);
+                        $commandeDetails->setQuantite($quantity);
+
+                        $commande->addDetailCommande($commandeDetails);
+                    }
+
+                    // On persiste et on flush
+                    $this->em->persist($commande);
+                    $this->em->flush();
+
+                    $session->remove('panier');
+
+                    $this->addFlash('message', 'Commande créée avec succès');
+                    return $this->redirectToRoute('app_home');
         }
 
      

@@ -39,7 +39,7 @@ export default function panier(props) {
 
 
     
-    const ajouterNouvelleValeur = () => {
+    const prixTotal = () => {
 
         const nouveauTableau = [...produits];
         
@@ -55,10 +55,10 @@ export default function panier(props) {
         const somme = tableau.reduce((acc, valeur) => acc + valeur, 0);
         window.maVariableGlobale = somme;
     }
-    ajouterNouvelleValeur();
+    prixTotal();
 
     useEffect(() => {
-        ajouterNouvelleValeur();
+        prixTotal();
       }, [boutonadd]);
 
     
@@ -80,7 +80,7 @@ export default function panier(props) {
                 <tbody>
                     
                     {produits.map(produit => (
-                            <tr>
+                            <tr key = {produit.id}>
                                 <td className="panierNom">{produit.nom}
                                 <img className = 'panierImage'src={produit.image} /></td>
                                 <td>{produit.prix} €</td>
@@ -106,7 +106,7 @@ export default function panier(props) {
                 {maVariableGlobale != 0 ? (
 
                     <tr className='total'>
-                        <td colspan="3">Total</td>
+                        <td colSpan="3">Total</td>
                         <td>{maVariableGlobale} €</td>
                         <td>
                             

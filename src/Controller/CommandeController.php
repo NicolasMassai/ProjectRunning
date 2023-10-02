@@ -35,12 +35,36 @@ class CommandeController extends AbstractController
         $this->em = $em;
     }
     
- 
+    #[Route('/historique', name: 'historique')]
+    public function montre(): Response
+    {
+        
+        return $this->render('commande/commande.html.twig', [
+        ]);
+    }
+
+    #[Route('/historique2', name: 'historique2')]
+    public function historique(CommandeRepository $commanderepository)
+    {
+
+        $user = $this->userRepository->find($this->getUser());
+        $id = $user->getId();
+
+        $commande = $commanderepository->requete($id);
+
+        return  $this->json($commande, 200);
 
 
+        /*
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $commande,
+        ]);*/
+
+    }
+/*
     #[Route('/ajout', name: 'add')]
     public function add(SessionInterface $session, ProduitRepository $produitRepository): Response
-    {$this->denyAccessUnlessGranted('ROLE_USER');
+    {
 
         $panier = $session->get('panier', []);
 
@@ -82,21 +106,7 @@ class CommandeController extends AbstractController
 
         $this->addFlash('message', 'Commande créée avec succès');
         return $this->redirectToRoute('app_home');
-    }
-    
-    #[Route('/historique', name: 'historique')]
-    public function historique(CommandeRepository $commanderepository)
-    {
+    }*/
 
-        $user = $this->userRepository->find($this->getUser());
-        $id = $user->getId();
-
-        $commande = $commanderepository->requete($id);
-
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commande,
-        ]);
-
-    }
       
 }
