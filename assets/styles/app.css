@@ -244,7 +244,6 @@ body, h2, p {
 header {
   color: #000000;
   text-align: center;
-  padding: 5px;
   width: 100%;
   position: relative;
   margin: 0 auto;
@@ -348,6 +347,11 @@ footer {
   color: #333;
   display: block;
 }
+
+.example-wrapper {
+   margin: 1em auto; 
+   font: 18px/1.5 sans-serif;
+  }
 
 
 

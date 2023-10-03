@@ -24,17 +24,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class Produit_Controller extends AbstractController
 {
 
-    
+
     private EntityManagerInterface $em;
     private UserRepository $userRepository;
 
-    
+
     public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
     {
         $this->userRepository = $userRepository;
         $this->em = $em;
     }
-    
+
     #[Route('/produit', name: 'app_produit')]
     public function index(): Response
     {
@@ -64,7 +64,6 @@ class Produit_Controller extends AbstractController
                 'image' => $product->getImage(),
                 'role' => current($user->getRoles())
             ];
-        
         }
         return $this->json($produits, 200);
     }
@@ -72,7 +71,7 @@ class Produit_Controller extends AbstractController
     #[Route('/produit/chaussure', name: 'app_produit_chaussure')]
     public function chaussure(): Response
     {
-        
+
         return $this->render('produit/chaussure.html.twig', [
             'produits' => 'produit'
         ]);
@@ -107,7 +106,7 @@ class Produit_Controller extends AbstractController
     #[Route('/produit/montre', name: 'app_produit_montre')]
     public function montre(): Response
     {
-        
+
         return $this->render('produit/montre.html.twig', [
             'produits' => 'produit'
         ]);
@@ -121,13 +120,13 @@ class Produit_Controller extends AbstractController
         $id = $produit->getId();
 
         $produit = $produitrepository->requete($id);
-     
+
 
         return $this->render('produit/getId.html.twig', [
             'produits' => $produit
         ]);
     }
-    
+
 
 
     #[Route('/produit/create', name: 'app_produit_create')]
@@ -135,8 +134,13 @@ class Produit_Controller extends AbstractController
     public function create(Service $myService, Request $request): Response
 
     {
-        $form = $myService->create($request, new Produit, new ProduitType, 
-                new ByteString('produit'), new ByteString('produit'));
+        $form = $myService->create(
+            $request,
+            new Produit,
+            new ProduitType,
+            new ByteString('produit'),
+            new ByteString('produit')
+        );
 
         return $form;
     }
@@ -146,11 +150,11 @@ class Produit_Controller extends AbstractController
 
 
     public function update(Produit $produit, Request $request): Response
-    { 
+    {
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($produit);  
+            $this->em->persist($produit);
             $this->em->flush();
             return $this->redirectToRoute('app_produit');
         }
@@ -158,5 +162,4 @@ class Produit_Controller extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import image from './montre1.jpg'
+import { constantes } from '../../constante';
+
 
 
 export default function (props) {
@@ -9,7 +10,7 @@ export default function (props) {
     const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
-    fetch('https://127.0.0.1:8000/produit/montre2', {method : 'GET'})
+    fetch(constantes.url + '/produit/montre2', {method : 'GET'})
     .then (response => response.json () )
     .then ( apiProduit => {
         setProduit(apiProduit);
@@ -51,7 +52,7 @@ export default function (props) {
                     <>
                             <li key={currentproduit.id}>
                                 <h1 className='nom'>{currentproduit.nom}</h1>
-                                <img src={currentproduit.image} />
+                                <img src={constantes.url + currentproduit.image} />
                                 <h3>Description : {currentproduit.description}</h3>
                                 <h3>Prix : {currentproduit.prix} €</h3>
                                 <h3>Couleur : {currentproduit.couleur}</h3>

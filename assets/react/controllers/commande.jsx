@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import image from './chaussure1.jpg'
+import { constantes } from '../../constante';
 
 
 export default function panier(props) {
@@ -10,7 +10,7 @@ export default function panier(props) {
 
 
     useEffect(() => {
-    fetch('https://127.0.0.1:8000/commandes/historique2', {method : 'GET'})
+    fetch(constantes.url + '/commandes/historique2', {method : 'GET'})
     .then (response => response.json () )
     .then ( apiProduit => {
         setProduit(apiProduit);

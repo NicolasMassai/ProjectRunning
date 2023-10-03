@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function (props) {
 
-    const [produit, setProduit] = useState([]);
+  /*  const [produit, setProduit] = useState([]);
 
     fetch('https://127.0.0.1:8000/produit/chaussure', {method : 'GET'})
     .then (response => response.json () )
@@ -24,5 +24,5 @@ export default function (props) {
                 )}
             </div>
         );
-    
+    */
 }

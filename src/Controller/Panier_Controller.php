@@ -23,7 +23,7 @@ use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-  
+
 #[Route('/panier', name: 'app_panier_')]
 #[IsGranted('ROLE_USER')]
 class Panier_Controller extends AbstractController
@@ -33,7 +33,7 @@ class Panier_Controller extends AbstractController
     private EntityManagerInterface $em;
     private UserRepository $userRepository;
 
-    
+
     public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
     {
         $this->userRepository = $userRepository;
@@ -43,9 +43,8 @@ class Panier_Controller extends AbstractController
     #[Route('/', name: 'index')]
     public function montre(): Response
     {
-        
-        return $this->render('panier/panier.html.twig', [
-        ]);
+
+        return $this->render('panier/panier.html.twig', []);
     }
 
     #[Route('/2', name: 'index2')]
@@ -57,7 +56,7 @@ class Panier_Controller extends AbstractController
         $data = [];
         $total = 0;
 
-        foreach($panier as $id => $quantity){
+        foreach ($panier as $id => $quantity) {
             $produit = $produitrepository->find($id);
 
             $data[] = [
@@ -65,17 +64,16 @@ class Panier_Controller extends AbstractController
                 'nom' => $produit->getNom(),
                 'prix' => $produit->getPrix(),
                 'quantity' => $quantity,
-                'image'=>$produit->getImage()
+                'image' => $produit->getImage()
             ];
             $total += $produit->getPrix() * $quantity;
-
         }
 
         return  $this->json($data, 200);
-        
+
         //return  $this->render('panier/index.html.twig', compact('data', 'total'));
 
-        
+
     }
 
 
@@ -86,13 +84,13 @@ class Panier_Controller extends AbstractController
         $id = $produit->getId();
         $panier = $session->get('panier', []);
 
-            if(empty($panier[$id])){
-                $panier[$id] = 1;}
-            else{
-                $panier[$id]++;
-            }
+        if (empty($panier[$id])) {
+            $panier[$id] = 1;
+        } else {
+            $panier[$id]++;
+        }
 
-            $session->set('panier', $panier);
+        $session->set('panier', $panier);
 
         return $this->redirectToRoute('app_panier_index');
     }
@@ -108,16 +106,16 @@ class Panier_Controller extends AbstractController
 
         // On retire le produit du panier s'il n'y a qu'1 exemplaire
         // Sinon on décrémente sa quantité
-        if(!empty($panier[$id])){
-            if($panier[$id] > 1){
+        if (!empty($panier[$id])) {
+            if ($panier[$id] > 1) {
                 $panier[$id]--;
-            }else{
+            } else {
                 unset($panier[$id]);
             }
         }
 
         $session->set('panier', $panier);
-        
+
         return $this->redirectToRoute('app_panier_index');
     }
 
@@ -128,12 +126,12 @@ class Panier_Controller extends AbstractController
 
         $panier = $session->get('panier', []);
 
-        if(!empty($panier[$id])){
+        if (!empty($panier[$id])) {
             unset($panier[$id]);
         }
 
         $session->set('panier', $panier);
-        
+
         return $this->redirectToRoute('app_panier_index');
     }
 
@@ -146,14 +144,14 @@ class Panier_Controller extends AbstractController
     }
 
     #[Route('/buy', name: 'buy')]
-    public function buy(SessionInterface $session, ProduitRepository $produitrepository,Request $request, NotifierInterface $notifier)
+    public function buy(SessionInterface $session, ProduitRepository $produitrepository, Request $request, NotifierInterface $notifier)
     {
         $panier = $session->get('panier', []);
 
         $data = [];
         $total = 0;
 
-        foreach($panier as $id => $quantity){
+        foreach ($panier as $id => $quantity) {
             $produit = $produitrepository->find($id);
 
             $data[] = [
@@ -162,83 +160,76 @@ class Panier_Controller extends AbstractController
             ];
             $total += $produit->getPrix() * $quantity;
 
-            if ($produit->getQuantite() <= 0){
+            if ($produit->getQuantite() <= 0) {
                 $this->addFlash('message', 'plus de stock');
-            return $this->redirectToRoute('app_home');
-                
+                return $this->redirectToRoute('app_home');
             }
-            
+
             $produitQuantite = $produit->setQuantite(($produit->getQuantite() - $quantity));
-            
-      
         }
-        if($panier === []){
-            
+        if ($panier === []) {
+
             $this->addFlash('message', 'Votre panier est vide');
             return $this->redirectToRoute('app_home');
         }
-     
-        
+
+
         $user = $this->userRepository->find($this->getUser());
         $account = $user->getBank()->getAccount();
-        if ($account<$total){
+        if ($account < $total) {
             $notifier->send(new Notification('Solde insuffisant', ['browser']));
             return $this->redirectToRoute('app_bank_create');
+        } else {
+            $user->getBank()->setAccount(-$total);
+            $form = $this->createForm(Bank2Type::class, $user->getBank());
+            $form->handleRequest($request);
 
-        }
-        else{
-        $user->getBank()->setAccount(-$total);
-        $form = $this->createForm(Bank2Type::class, $user->getBank());
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
+            if ($form->isSubmitted() && $form->isValid()) {
                 $user->getBank()->setAccount($user->getBank()->getAccount() + $account);
                 $this->em->persist($produitQuantite);
                 $this->em->persist($user);
                 $this->em->flush();
 
-                    //return $this->redirectToRoute('app_commandes_add');
-                    
-                    //Le panier n'est pas vide, on crée la commande
-                    $commande = new Commande();
+                //return $this->redirectToRoute('app_commandes_add');
 
-                    // On remplit la commande
-                    $commande->setUser($this->getUser());
-                    $commande->setReference(uniqid());
+                //Le panier n'est pas vide, on crée la commande
+                $commande = new Commande();
 
-                    // On parcourt le panier pour créer les détails de commande
-                    foreach($panier as $item => $quantity){
-                        $commandeDetails = new DetailCommande();
+                // On remplit la commande
+                $commande->setUser($this->getUser());
+                $commande->setReference(uniqid());
 
-                        // On va chercher le produit
-                        $product = $produitrepository->find($item);
-                        
-                        $price = $product->getPrix();
+                // On parcourt le panier pour créer les détails de commande
+                foreach ($panier as $item => $quantity) {
+                    $commandeDetails = new DetailCommande();
 
-                        // On crée le détail de commande
-                        $commandeDetails->setProduit($product);
-                        $commandeDetails->setPrix($price);
-                        $commandeDetails->setQuantite($quantity);
+                    // On va chercher le produit
+                    $product = $produitrepository->find($item);
 
-                        $commande->addDetailCommande($commandeDetails);
-                    }
+                    $price = $product->getPrix();
 
-                    // On persiste et on flush
-                    $this->em->persist($commande);
-                    $this->em->flush();
+                    // On crée le détail de commande
+                    $commandeDetails->setProduit($product);
+                    $commandeDetails->setPrix($price);
+                    $commandeDetails->setQuantite($quantity);
 
-                    $session->remove('panier');
+                    $commande->addDetailCommande($commandeDetails);
+                }
 
-                    $this->addFlash('message', 'Commande créée avec succès');
-                    return $this->redirectToRoute('app_home');
+                // On persiste et on flush
+                $this->em->persist($commande);
+                $this->em->flush();
+
+                $session->remove('panier');
+
+                $this->addFlash('message', 'Commande créée avec succès');
+                return $this->redirectToRoute('app_home');
+            }
+
+
+            return $this->render('bank/buy.html.twig', [
+                'form' => $form->createView()
+            ]);
         }
-
-     
-        return $this->render('bank/buy.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }    
     }
-
-   
 }
