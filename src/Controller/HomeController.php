@@ -18,14 +18,11 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home', name: 'app_home')]
-    #[IsGranted("ROLE_USER")]
     public function index(): Response
     {
        
-        $user = $this->userRepository->find($this->getUser());
-
         return $this->render('home/index.html.twig', [
-            'user' => $user
+            'user' => 'user'
         ]);
     }
 }
