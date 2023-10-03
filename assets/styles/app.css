@@ -96,29 +96,25 @@ img {
 table{
   width: 100%;
 }
-/* Style pour l'en-tête du tableau */
+
 thead {
   background-color: #f2f2f2;
 }
 
-/* Style pour les lignes du corps du tableau */
 tbody {
   background-color: #fff;
 }
 
-/* Style pour le pied de tableau */
 tfoot {
   background-color: #f2f2f2;
 }
 
-/* Style pour les cellules du tableau (optionnel, ajustez selon vos besoins) */
 td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align : center;
 }
 
-/* Style pour les cellules de l'en-tête du tableau (optionnel, ajustez selon vos besoins) */
 th {
   padding: 10px;
   border: 1px solid #ddd;
@@ -183,12 +179,11 @@ th {
 }
 
 .PanierTitre{
-  content: '\1F6D2';
   text-align : center;
   color: #3498db;
   font-size: 60px;
-
 }
+
 .PanierTitre::after{
   content: '\1F6D2';
 }
@@ -197,14 +192,25 @@ th {
   font-size: 30px;
 }
 
-
+/*
 tbody td:nth-child(even) {
-  background-color: #f8f8f8; /* Couleur pour les lignes impaires */
+  background-color: #f8f8f8;
 }
 
-/* Styles pour les lignes paires du tableau */
 tbody td:nth-child(odd) {
-  background-color: #fff; /* Couleur pour les lignes paires */
+  background-color: #fff;
+}*/
+
+
+.commmande{
+  margin-bottom: 10px;
+  background-color: #4CAF50;
+}
+
+.commandeTitre{
+  text-align : center;
+  color: #3498db;
+  font-size: 60px;
 }
 
 

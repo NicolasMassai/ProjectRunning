@@ -58,13 +58,13 @@ export default function panier(props) {
 
             // Créer une ligne avec la cellule ID fusionnée verticalement
             rows.push(
-                <tr key={id}>
-                <td rowSpan={colSpan}>{id}</td>
-                <td>{produits[0].nom}</td>
-                <td>{produits[0].quantite}</td>
-                <td>{produits[0].prix}</td>
-                <td>{produits[0].quantite * produits[0].prix}</td>
-                <td  rowSpan={colSpan}>{maVariableGlobale[id]}</td>
+                <tr className = 'commande' key={id}>
+                    <td className ='commande' rowSpan={colSpan}>{id}</td>
+                    <td>{produits[0].nom}</td>
+                    <td>{produits[0].quantite}</td>
+                    <td>{produits[0].prix} €</td>
+                    <td>{produits[0].quantite * produits[0].prix} €</td>
+                    <td rowSpan={colSpan}>{maVariableGlobale[id]} €</td>
                 </tr>
             );
 
@@ -74,8 +74,8 @@ export default function panier(props) {
                 <tr key={`${id}-${i}`}>
                     <td>{produits[i].nom}</td>
                     <td>{produits[i].quantite}</td>
-                    <td>{produits[i].prix}</td>
-                    <td>{produits[i].quantite * produits[i].prix}</td>
+                    <td>{produits[i].prix} €</td>
+                    <td>{produits[i].quantite * produits[i].prix} €</td>
                 </tr>
                 );
             }
@@ -88,7 +88,7 @@ export default function panier(props) {
 
     return (
         <div className=''>
-            <h1 className=''>Commande</h1>
+            <h1 className='commandeTitre'>Commande</h1>
 
             <table>
                 <thead>
