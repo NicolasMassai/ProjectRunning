@@ -72,7 +72,9 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center; 
-  padding: 10px; 
+  padding: 10px;
+  margin-bottom: 2em;
+
 }
 
 .precedent, .suivant {
@@ -91,6 +93,7 @@ img {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  margin-bottom: 2em;
 
 }
 table{
@@ -202,9 +205,10 @@ tbody td:nth-child(odd) {
 }*/
 
 
-.commmande{
-  margin-bottom: 10px;
-  background-color: #4CAF50;
+
+
+.Commande{
+  margin-bottom: 3em;
 }
 
 .commandeTitre{
@@ -279,14 +283,13 @@ main {
 
 /* Style du pied de page */
 footer {
-  background-color: #333;
+  background-color: #646464;
   color: #fff;
   text-align: center;
   padding: 2px;
   position: fixed;
   bottom: 0;
-  width: 100%;
-}
+  width: 100%;}
 
 .panierLogo{
   position: absolute;
@@ -353,7 +356,67 @@ footer {
    font: 18px/1.5 sans-serif;
   }
 
+  /*Convertisseur*/
 
+  .convertisseur {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #333;
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .gauche,
+  .droite {
+    width: 48%; 
+    margin-bottom: 20px;
+  }
 
-
-
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn_convertir{
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn_reset {
+    background-color: #f44336;
+    margin-left: 10px;
+  }
+  
+  .btn_convertir:hover {
+    background-color: #45a049;
+  }
+  
+  .btn_reset:hover {
+    background-color: #d32f2f;
+  }
+  

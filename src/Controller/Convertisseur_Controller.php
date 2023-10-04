@@ -15,6 +15,7 @@ use App\Repository\ConvertisseurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ConvertisseurAllureToVitesseType;
 use App\Form\ConvertisseurVitesseToAllureType;
+use PhpParser\Builder\Class_;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,19 +34,59 @@ class Convertisseur_Controller extends AbstractController
     }
 
 
-    #[Route('/convertisseur/menu', name: 'app_convertisseur_menu')]
+    #[Route('/convertisseur', name: 'app_convertisseur_menu')]
     public function affichage(): Response
     {
 
         return $this->render('convertisseur_menu/index.html.twig', [
-            'convertisseur' => 'affichage',
         ]);
 
        
     }
 
-    #[Route('/convertisseur', name: 'app_convertisseur')]
-    public function convert(Request $request, Service $service): Response
+    #[Route('/convertisseur1', name: 'app_convertisseur1')]
+    public function convertAlluretoVitesse(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+    
+    /*
+    #[Route('/convertisseur2', name: 'app_convertisseur1')]
+    public function convertAllureitesse(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+    #[Route('/convertisseur3', name: 'app_convertisseur1')]
+    public function convertAlluritesse(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+    #[Route('/convertisseur4', name: 'app_convertisseur1')]
+    public function convertAlluretotesse(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+    #[Route('/convertisseur5', name: 'app_convertisseur1')]
+    public function convertAlluretoVise(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+    #[Route('/convertisseur6', name: 'app_convertisseur1')]
+    public function convertAlluretoVitee(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+    #[Route('/convertisseur7', name: 'app_convertisseur1')]
+    public function convertAlluretoVitess(): Response
+    {
+        return $this->render('convertisseur/resultat.html.twig', []);
+    }
+*/
+
+/*
+
+    #[Route('/convertisseur1JSON', name: 'app_convertisseur_JSON')]
+    public function convertAlluretoVitesseJSON(Request $request, Service $service): Response
     {
 
         $c = new Convertisseur();
@@ -57,14 +98,16 @@ class Convertisseur_Controller extends AbstractController
             $running = $form->get('allure')->getData();    
             $nombre = $service->convertisseurAllureToVitesse($running);
             $speedInKilometerperHour = round($nombre, 2);
-            
-            $this->em->persist($c);
-            $this->em->flush();
-            
-            return $this->render('convertisseur/resultat.html.twig', [
+        
+           
+
+            $data[] = [
                 'allure' => $running,
-                'temps' => $speedInKilometerperHour,
-            ]);
+                'vitesse' => $speedInKilometerperHour
+            ];
+
+            return $this->json($data, 200);
+
         }
 
         return $this->render('convertisseur/index.html.twig', [
@@ -316,5 +359,5 @@ class Convertisseur_Controller extends AbstractController
 }
 
 
-
+*/
 }

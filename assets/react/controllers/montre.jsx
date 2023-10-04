@@ -23,7 +23,7 @@ export default function (props) {
     }
 
     function update(id) {
-        window.location.href = `/produit/find/${id}`;    
+        window.location.href = `/produit/update/${id}`;    
     }
 
     function create() {
@@ -45,7 +45,7 @@ export default function (props) {
             <div className='bloc'>
                 { produit.length === 0 && <span>Loading...</span>}
                 
-                <button className = 'precedent'onClick={prevPage} disabled={currentPage === 0}></button>
+                <button className = 'precedent' onClick={prevPage} disabled={currentPage === 0}></button>
 
                 <div className="article-container">
                 {  produit.length > 0  && (
@@ -60,7 +60,7 @@ export default function (props) {
                                 {currentproduit.quantite > 0 ? (
                                     <div>
                                         <h3>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</h3> 
-                                        {currentproduit.role === 'ROLE_USER'  && <button className='bouton' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
+                                        {currentproduit.role === 'ROLE_USER' && <button className='bouton' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
                                             {props.button}
                                         </button>}
                                     </div>

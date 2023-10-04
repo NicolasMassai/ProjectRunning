@@ -65,7 +65,7 @@ export default function panier(props) {
     
     return (
         <div className='panier'>
-            <h1 className='PanierTitre'>Panier</h1>
+            <h1 className='PanierTitre'>Votre Panier</h1>
             {maVariableGlobale != 0 ? (
                 
             <table>

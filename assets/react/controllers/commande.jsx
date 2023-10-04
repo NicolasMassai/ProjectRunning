@@ -58,8 +58,8 @@ export default function panier(props) {
 
             // Créer une ligne avec la cellule ID fusionnée verticalement
             rows.push(
-                <tr className = 'commande' key={id}>
-                    <td className ='commande' rowSpan={colSpan}>{id}</td>
+                <tr key={id}>
+                    <td rowSpan={colSpan}>{id}</td>
                     <td>{produits[0].nom}</td>
                     <td>{produits[0].quantite}</td>
                     <td>{produits[0].prix} €</td>
@@ -87,7 +87,7 @@ export default function panier(props) {
 
 
     return (
-        <div className=''>
+        <div className='Commande'>
             <h1 className='commandeTitre'>Commande</h1>
 
             <table>
