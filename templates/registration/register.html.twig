@@ -3,8 +3,12 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
+<style>
+    .register {width: 35%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; margin-top: 50px;}
+</style>
+
+<div class="register">
         {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.nom) }}
         {{ form_row(registrationForm.prenom) }}
@@ -14,7 +18,8 @@
             label: 'Password'
         }) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <button class= 'boutonLogin' type="submit">Register</button>
+        {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
 

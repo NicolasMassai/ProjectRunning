@@ -372,7 +372,7 @@ footer {
     margin-bottom: 40px;
   }
   
-  form {
+  .formulaire {
     display: flex;
     justify-content: space-between;
   }
@@ -389,8 +389,12 @@ footer {
     margin-bottom: 10px;
   }
   
+  .inputConvert{
+  width: 30%;
+  }
+
   input {
-    width: 30%;
+    width: 100%;
     padding: 8px;
     margin-top: 5px;
     margin-right: 5px;
@@ -475,4 +479,36 @@ footer {
     background-color: #45a049;
   }
   
+
+  /*login*/
+
+
+.formLogin {
+  width: 35%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 50px;
+}
+
+.inputLogin{
+  width: 100%;
+}
+
+
+.boutonLogin {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Styles pour le bouton au survol */
+.boutonLogin:hover {
+  background-color: #007bff;
+}
+
   

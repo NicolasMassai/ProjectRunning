@@ -63,6 +63,9 @@ const ConvertisseurAllureVitesse = () => {
     const allureSecondes = Math.round((allureEnMinutes2 - allureMinutes) * 60);
     setAllureMinutes(allureMinutes.toString());
     setAllureSecondes(allureSecondes.toString());
+    const allureEnMinutes = parseFloat(allureMinutes) + parseFloat(allureSecondes) / 60;
+    const nouvelleVitesse = 60 / allureEnMinutes;
+    setVitesse(nouvelleVitesse.toFixed(2));    
   };
 
   const convertirAllureVersVitesse = (e) => {
@@ -96,6 +99,8 @@ const ConvertisseurAllureVitesse = () => {
     setTempsHeures(tempsTotalHeures.toString());
     setTempsMinutes(tempsTotalMinutes.toString());
     setTempsSecondes(tempsTotalSecondes.toString());
+    const nouvelleVitesse = 60 / allureEnMinutes;
+    setVitesse(nouvelleVitesse.toFixed(2));
   };
 
   const convertirAllureTempsVersDistance = (e) => {
@@ -108,6 +113,8 @@ const ConvertisseurAllureVitesse = () => {
       parseFloat(tempsSecondes) / 60;
     const distanceEnKilometres = tempsTotalEnHeures / allureEnMinutes;
     setDistance(distanceEnKilometres.toFixed(2).toString());
+    const nouvelleVitesse = 60 / allureEnMinutes;
+    setVitesse(nouvelleVitesse.toFixed(2));
   };
 
   const convertirVitesseTempsVersDistance = (e) => {
@@ -119,6 +126,7 @@ const ConvertisseurAllureVitesse = () => {
     const nouvelleVitesse = parseFloat(vitesse);
     const distanceEnKilometres = tempsTotalEnHeures * nouvelleVitesse;
     setDistance(distanceEnKilometres.toFixed(2).toString());
+    convertirVitesseVersAllure(e);
   };
 
   const convertirVitesseDistanceVersTemps = (e) => {
@@ -133,6 +141,7 @@ const ConvertisseurAllureVitesse = () => {
     setTempsHeures(tempsTotalHeures.toString());
     setTempsMinutes(tempsTotalMinutes.toString());
     setTempsSecondes(tempsTotalSecondes.toString());
+    convertirVitesseVersAllure(e);
   };
 
   const reset = (e) => {
@@ -149,12 +158,12 @@ const ConvertisseurAllureVitesse = () => {
   return (
     <div className="convertisseur">
       <h2 className="titreConvertisseur">Convertisseur</h2>
-      <form>
+      <form className="formulaire">
         <div className="gauche">
           <br />
           <label>
           <span className="titreInput">Distance :</span>
-            <input
+            <input className="inputConvert"
               type="text"
               name="distance"
               placeholder="Kilomètres"
@@ -166,21 +175,24 @@ const ConvertisseurAllureVitesse = () => {
           <label>
             <div>
               <span className="titreInput">Temps :</span>
-              <input
+              <input className="inputConvert
+"
                 type="text"
                 name="tempsHeures"
                 placeholder="Heures"
                 value={tempsHeures}
                 onChange={handleChange}
               />
-              <input
+              <input className="inputConvert
+"
                 type="text"
                 name="tempsMinutes"
                 placeholder="Minutes"
                 value={tempsMinutes}
                 onChange={handleChange}
               />
-              <input
+              <input className="inputConvert
+"
                 type="text"
                 name="tempsSecondes"
                 placeholder="Secondes"
@@ -194,14 +206,14 @@ const ConvertisseurAllureVitesse = () => {
           <br />
           <label>
           <span className="titreInput">Allure :</span>
-            <input
+            <input className="inputConvert"
               type="text"
               name="allureMinutes"
               placeholder="Minutes"
               value={allureMinutes}
               onChange={handleChange}
             />
-            <input
+            <input className="inputConvert"
               type="text"
               name="allureSecondes"
               placeholder="Secondes"
@@ -212,7 +224,7 @@ const ConvertisseurAllureVitesse = () => {
           <br />
           <label>
           <span className="titreInput">Vitesse :</span>
-            <input
+            <input className="inputConvert"
               type="text"
               name="vitesse"
               placeholder="Km/H"
