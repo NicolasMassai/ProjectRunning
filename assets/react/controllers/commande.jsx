@@ -88,7 +88,7 @@ export default function panier(props) {
 
     return (
         <div className='Commande'>
-            <h1 className='commandeTitre'>Commande</h1>
+            <h1 className='commandeTitre'> Vos Commandes</h1>
 
             <table>
                 <thead>

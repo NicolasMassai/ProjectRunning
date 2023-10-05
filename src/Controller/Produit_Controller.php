@@ -138,7 +138,7 @@ class Produit_Controller extends AbstractController
             $request,
             new Produit,
             new ProduitType,
-            new ByteString('produit'),
+            new ByteString('home'),
             new ByteString('produit')
         );
 
@@ -156,7 +156,7 @@ class Produit_Controller extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($produit);
             $this->em->flush();
-            return $this->redirectToRoute('app_produit');
+            return $this->redirectToRoute('app_home');
         }
         return $this->render('produit/create.html.twig', [
             'form' => $form->createView()

@@ -148,12 +148,12 @@ const ConvertisseurAllureVitesse = () => {
 
   return (
     <div className="convertisseur">
-      <h2>Convertisseur</h2>
+      <h2 className="titreConvertisseur">Convertisseur</h2>
       <form>
         <div className="gauche">
           <br />
           <label>
-            Distance :
+          <span className="titreInput">Distance :</span>
             <input
               type="text"
               name="distance"
@@ -164,8 +164,8 @@ const ConvertisseurAllureVitesse = () => {
           </label>
           <br />
           <label>
-            <div className="heureH">
-              Temps :
+            <div>
+              <span className="titreInput">Temps :</span>
               <input
                 type="text"
                 name="tempsHeures"
@@ -193,7 +193,7 @@ const ConvertisseurAllureVitesse = () => {
         <div className="droite">
           <br />
           <label>
-            Allure :
+          <span className="titreInput">Allure :</span>
             <input
               type="text"
               name="allureMinutes"
@@ -211,7 +211,7 @@ const ConvertisseurAllureVitesse = () => {
           </label>
           <br />
           <label>
-            Vitesse :
+          <span className="titreInput">Vitesse :</span>
             <input
               type="text"
               name="vitesse"

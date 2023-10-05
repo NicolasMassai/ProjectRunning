@@ -24,16 +24,35 @@ class BankController extends AbstractController
         $this->userRepository = $userRepository;
         $this->em = $em;
     }
-
     #[Route('/bank', name: 'app_bank')]
     public function index(): Response
     {
 
-        $user = $this->userRepository->find($this->getUser());
-
         return $this->render('bank/index.html.twig', [
-            'user' => $user
         ]);
+    }
+
+    
+
+    #[Route('/bank2', name: 'app_bank2')]
+    public function index2(): Response
+    {
+
+        $user = $this->userRepository->find($this->getUser());
+        $data = [];
+ 
+        
+ 
+             $data[] = [
+                 'id' => $user->getId(),
+                 'nom'=> $user->getNom(),
+                 'solde' => $user->getBank()->getAccount(),
+                
+             ];
+         
+
+        return $this->json($data, 200);
+       
     }
 
     #[Route('/bank/create', name: 'app_bank_create')]
