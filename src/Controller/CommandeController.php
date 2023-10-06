@@ -61,52 +61,5 @@ class CommandeController extends AbstractController
         ]);*/
 
     }
-/*
-    #[Route('/ajout', name: 'add')]
-    public function add(SessionInterface $session, ProduitRepository $produitRepository): Response
-    {
-
-        $panier = $session->get('panier', []);
-
-        if($panier === []){
-            
-            $this->addFlash('message', 'Votre panier est vide');
-            return $this->redirectToRoute('app_home');
-        }
-
-        //Le panier n'est pas vide, on crée la commande
-        $commande = new Commande();
-
-        // On remplit la commande
-        $commande->setUser($this->getUser());
-        $commande->setReference(uniqid());
-
-        // On parcourt le panier pour créer les détails de commande
-        foreach($panier as $item => $quantity){
-            $commandeDetails = new DetailCommande();
-
-            // On va chercher le produit
-            $product = $produitRepository->find($item);
-            
-            $price = $product->getPrix();
-
-            // On crée le détail de commande
-            $commandeDetails->setProduit($product);
-            $commandeDetails->setPrix($price);
-            $commandeDetails->setQuantite($quantity);
-
-            $commande->addDetailCommande($commandeDetails);
-        }
-
-        // On persiste et on flush
-        $this->em->persist($commande);
-        $this->em->flush();
-
-        $session->remove('panier');
-
-        $this->addFlash('message', 'Commande créée avec succès');
-        return $this->redirectToRoute('app_home');
-    }*/
-
       
 }

@@ -55,10 +55,10 @@ export default function panier() {
         {isUserConnected() ? (
           <div className="bande">
             <button className="bandeBouton" type="button" onClick={chaussure}>
-              Chaussure
+              Chaussures
             </button>
             <button className="bandeBouton" type="button" onClick={montre}>
-              Montre
+              Montres
             </button>
             <button
               className="bandeBouton"
@@ -77,10 +77,10 @@ export default function panier() {
         ) : (
           <div className="bande">
             <button className="bandeBouton" type="button" onClick={chaussure}>
-              Chaussure
+              Chaussures
             </button>
             <button className="bandeBouton" type="button" onClick={montre}>
-              Montre
+              Montres
             </button>
             <button
               className="bandeBouton"

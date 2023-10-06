@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Panier;
 use App\Entity\Produit;
 use App\Form\Bank2Type;
 use App\Entity\Commande;

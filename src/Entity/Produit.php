@@ -40,9 +40,6 @@ class Produit
     #[ORM\Column]
     private ?int $quantite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'produit')]
-    private ?Panier $panier = null;
-
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: DetailCommande::class)]
     private Collection $detailCommandes;
 
@@ -148,17 +145,6 @@ class Produit
         return $this;
     }
 
-    public function getPanier(): ?Panier
-    {
-        return $this->panier;
-    }
-
-    public function setPanier(?Panier $panier): static
-    {
-        $this->panier = $panier;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, DetailCommande>
