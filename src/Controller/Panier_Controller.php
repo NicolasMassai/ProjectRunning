@@ -51,9 +51,7 @@ class Panier_Controller extends AbstractController
     {
         $panier = $session->get('panier', []);
 
-        // On initialise des variables
         $data = [];
-        $total = 0;
 
         foreach ($panier as $id => $quantity) {
             $produit = $produitrepository->find($id);
@@ -63,14 +61,12 @@ class Panier_Controller extends AbstractController
                 'nom' => $produit->getNom(),
                 'prix' => $produit->getPrix(),
                 'quantity' => $quantity,
+                'quantityTotal' => $produit->getQuantite(),
                 'image' => $produit->getImage()
             ];
-            $total += $produit->getPrix() * $quantity;
         }
 
         return  $this->json($data, 200);
-
-        //return  $this->render('panier/index.html.twig', compact('data', 'total'));
 
 
     }
@@ -159,14 +155,14 @@ class Panier_Controller extends AbstractController
             ];
             $total += $produit->getPrix() * $quantity;
 
-            if ($produit->getQuantite() <= 0) {
+            $produitQuantite = $produit->setQuantite(($produit->getQuantite() - $quantity));
+
+            if ($produitQuantite->getQuantite() < 0) {
                 
                 $session->remove('panier');
                 $this->addFlash('message', 'plus de stock');
                 return $this->redirectToRoute('app_home');
             }
-
-            $produitQuantite = $produit->setQuantite(($produit->getQuantite() - $quantity));
         }
         
 
@@ -186,8 +182,6 @@ class Panier_Controller extends AbstractController
                 $this->em->persist($produitQuantite);
                 $this->em->persist($user);
                 $this->em->flush();
-
-                //return $this->redirectToRoute('app_commandes_add');
 
                 //Le panier n'est pas vide, on crée la commande
                 $commande = new Commande();

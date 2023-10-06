@@ -87,16 +87,23 @@ export default function panier() {
                                 <td>{produit.prix} €</td>
                                 <td>{produit.quantity}</td>
                                 <td>{produit.quantity * produit.prix}€</td>                                
-                                <td clash2sName='action'>
+                                <td>
+                                {produit.quantity < produit.quantityTotal ? (
                                     <button className ='add' type="button" onClick={(e) => boutonadd(produit.id,e)}>
                                     </button>
-                                    <button className ='remove'type="button" onClick={(e) => boutonremove(produit.id,e)}>
-                                        
+                                    ) : (
+                                    <button disabled={true} className ='add' type="button" onClick={(e) => boutonadd(produit.id,e)}>
+                                    </button>
+                                    )
+                                }                                  
+                                    <button className ='remove'type="button" onClick={(e) => boutonremove(produit.id,e)}> 
                                     </button>
                                     <button className ='delete' type="button" onClick={(e) => boutondelete(produit.id,e)}>
                                     </button>
                                 </td>
                             </tr>
+
+                            
                             
 
                     ))}
