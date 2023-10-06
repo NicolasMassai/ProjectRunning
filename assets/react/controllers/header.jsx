@@ -49,9 +49,7 @@ export default function header() {
     <div>
       <header>
         <h1 className="accueil"></h1>
-        <a href="#" onClick={home}>
-          <img className="runsport" src={runsport} />
-        </a>
+          <img className="runsport" src={runsport} onClick={home} />
         {isUserConnected() ? (
           <div className="bande">
             <button className="bandeBouton" type="button" onClick={chaussure}>

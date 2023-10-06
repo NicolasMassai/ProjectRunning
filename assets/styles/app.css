@@ -245,6 +245,7 @@ body, p {
 .runsport{
   width: 13%;
   margin-left: 40px;
+  cursor: pointer;
 
 }
 
@@ -294,7 +295,8 @@ footer {
   padding: 2px;
   position: fixed;
   bottom: 0;
-  width: 100%;}
+  width: 100%;
+}
 
 .panierLogo{
   position: absolute;
