@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ConvertisseurAllureVitesse = () => {
+const Convertisseur = () => {
   const [distance, setDistance] = useState("");
   const [tempsHeures, setTempsHeures] = useState("");
   const [tempsMinutes, setTempsMinutes] = useState("");
@@ -247,4 +247,4 @@ const ConvertisseurAllureVitesse = () => {
   );
 };
 
-export default ConvertisseurAllureVitesse;
+export default Convertisseur;

@@ -1,7 +1,7 @@
 import React  from "react";
 
 
-export default function panier() {
+export default function footer() {
  
   return (
     <div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { constantes } from '../../constante';
 
 
-export default function panier(props) {
+export default function commande() {
 
 
     const [produits, setProduit] = useState([]);

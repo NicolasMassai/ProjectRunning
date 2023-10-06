@@ -2,7 +2,7 @@ import React from "react";
 import userphoto from "./photo/utilisateur.png";
 import runsport from "./photo/runsport.jpg";
 
-export default function panier() {
+export default function header() {
 
   const isUserConnected = () =>
     localStorage.getItem("userConnected") === "true";

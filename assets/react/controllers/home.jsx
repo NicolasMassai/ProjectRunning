@@ -1,7 +1,7 @@
 import React from "react";
 import accueilImage from "./photo/accueil.jpg";
 
-export default function panier() {
+export default function home() {
 
 
   return (

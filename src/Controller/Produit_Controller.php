@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Produit;
 use App\Form\Bank2Type;
 use App\Service\Service;
 use App\Form\ProduitType;
 use App\Entity\CategorieProduit;
-use App\Entity\User;
 use App\Form\CategorieProduitType;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
@@ -15,8 +15,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\ByteString;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -33,15 +36,6 @@ class Produit_Controller extends AbstractController
     {
         $this->userRepository = $userRepository;
         $this->em = $em;
-    }
-
-    #[Route('/produit', name: 'app_produit')]
-    public function index(): Response
-    {
-
-        return $this->render('produit/index.html.twig', [
-            'produits' => 'produit'
-        ]);
     }
 
     #[Route('/produit/chaussure2', name: 'app_produit_chaussure2')]
@@ -132,7 +126,6 @@ class Produit_Controller extends AbstractController
     #[Route('/produit/create', name: 'app_produit_create')]
     #[IsGranted('ROLE_ADMIN')]
     public function create(Service $myService, Request $request): Response
-
     {
         $form = $myService->create(
             $request,
@@ -147,8 +140,6 @@ class Produit_Controller extends AbstractController
 
     #[Route('/produit/update/{produit}', name: 'app_produit_update')]
     #[IsGranted("ROLE_ADMIN")]
-
-
     public function update(Produit $produit, Request $request): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
@@ -158,8 +149,19 @@ class Produit_Controller extends AbstractController
             $this->em->flush();
             return $this->redirectToRoute('app_home');
         }
-        return $this->render('produit/create.html.twig', [
+        return $this->render('produit/update.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    #[Route('/produit/delete/{produit}', name: 'app_produit_delete')]
+    #[IsGranted("ROLE_ADMIN")]
+    public function delete(Produit $produit, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response
+    {
+
+            $this->em->remove($produit);
+            $this->em->flush();
+        
+        return $this->redirectToRoute("app_home");
     }
 }

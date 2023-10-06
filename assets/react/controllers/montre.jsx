@@ -30,6 +30,13 @@ export default function (props) {
         window.location.href = `/produit/create`;    
     }
 
+    function Delete(id) {
+        window.location.href = `/produit/delete/${id}`;    
+    }
+
+    function categorie() {
+        window.location.href = `/categorie_produit`;    
+    }
 
   const nextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, produit.length - 1));
@@ -76,6 +83,15 @@ export default function (props) {
 
                                     {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(create)}>
                                         Créer un produit
+                                    </button>}
+
+                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(e) => Delete(currentproduit.id,e)}>
+                                        Supprimer le produit
+                                    </button>}
+                                </div>
+                                <div>
+                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(categorie)}>
+                                            Categorie
                                     </button>}
                                 </div>
                                 <span>{currentPage + 1} / {produit.length}</span>

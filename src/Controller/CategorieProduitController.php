@@ -15,15 +15,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieProduitController extends AbstractController
 {
+
     #[Route('/categorie_produit', name: 'app_categorie_produit')]
-    #[IsGranted('ROLE_USER')]
-    public function index(CategorieProduitRepository $categorieProduitRepository): Response
+    #[IsGranted('ROLE_ADMIN')]
+    public function index(): Response
+    {
+        return $this->render('categorie_produit/index.html.twig', [
+        ]);
+    }
+    
+
+    #[Route('/categorie_produit2', name: 'app_categorie_produit2')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function index2(CategorieProduitRepository $categorieProduitRepository): Response
     {
         $categorie = $categorieProduitRepository->findAll();
 
-        return $this->render('categorie_produit/index.html.twig', [
-            'categories' => $categorie
-        ]);
+
+        $categories = [];
+        foreach ($categorie as $product) {
+            $categories[] = [
+                'id' => $product->getId(),
+                'nom' => $product->getName(),
+                
+            ];
+        }
+        return $this->json($categories, 200);
     }
     
 

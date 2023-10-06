@@ -3,7 +3,7 @@ import { constantes } from '../../constante';
 
 
 
-export default function panier(props) {
+export default function panier() {
 
 
     const [produits, setProduit] = useState([]);  
