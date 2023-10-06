@@ -41,15 +41,12 @@ class BankController extends AbstractController
         $user = $this->userRepository->find($this->getUser());
         $data = [];
  
-        
- 
              $data[] = [
                  'id' => $user->getId(),
                  'nom'=> $user->getNom(),
                  'solde' => $user->getBank()->getAccount(),
                 
-             ];
-         
+             ]; 
 
         return $this->json($data, 200);
        

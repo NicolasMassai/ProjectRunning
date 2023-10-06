@@ -157,7 +157,7 @@ const ConvertisseurAllureVitesse = () => {
 
   return (
     <div className="convertisseur">
-      <h2 className="titreConvertisseur">Convertisseur</h2>
+      <label className="titreConvertisseur">Convertisseur</label>
       <form className="formulaire">
         <div className="gauche">
           <br />

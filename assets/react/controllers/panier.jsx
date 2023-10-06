@@ -87,7 +87,7 @@ export default function panier(props) {
                                 <td>{produit.prix} €</td>
                                 <td>{produit.quantity}</td>
                                 <td>{produit.quantity * produit.prix}€</td>                                
-                                <td className='action'>
+                                <td clash2sName='action'>
                                     <button className ='add' type="button" onClick={(e) => boutonadd(produit.id,e)}>
                                     </button>
                                     <button className ='remove'type="button" onClick={(e) => boutonremove(produit.id,e)}>

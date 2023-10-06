@@ -161,17 +161,15 @@ class Panier_Controller extends AbstractController
             $total += $produit->getPrix() * $quantity;
 
             if ($produit->getQuantite() <= 0) {
+                
+                $session->remove('panier');
                 $this->addFlash('message', 'plus de stock');
                 return $this->redirectToRoute('app_home');
             }
 
             $produitQuantite = $produit->setQuantite(($produit->getQuantite() - $quantity));
         }
-        if ($panier === []) {
-
-            $this->addFlash('message', 'Votre panier est vide');
-            return $this->redirectToRoute('app_home');
-        }
+        
 
 
         $user = $this->userRepository->find($this->getUser());
