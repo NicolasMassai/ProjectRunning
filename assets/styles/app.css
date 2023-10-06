@@ -470,9 +470,17 @@ footer {
     border-radius: 4px;
     cursor: pointer;
     font-size: 22px;
-  
-
+    transition: background-color 0.3s
   }
+  
+  /*titre Account*/
+  .required { 
+    font-size : 40px;
+  }
+  
+   .bankTwig button:hover {
+      background-color: #45a049;
+    }
 
 
   .bank_container {
@@ -564,9 +572,27 @@ footer {
   cursor: pointer;
 }
 
+.register {
+  width: 35%; 
+  margin: auto; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  margin-top: 50px;
+}
+
+.register .required{
+  font-size: 25px;
+}
+
+
 /* Styles pour le bouton au survol */
 .boutonLogin:hover {
   background-color: #007bff;
+}
+
+.titreCategorie{
+  text-align: center;
 }
 
 
