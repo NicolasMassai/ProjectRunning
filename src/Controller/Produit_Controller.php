@@ -2,22 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Produit;
-use App\Form\Bank2Type;
 use App\Service\Service;
 use App\Form\ProduitType;
-use App\Entity\CategorieProduit;
-use App\Form\CategorieProduitType;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\ByteString;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -105,22 +99,6 @@ class Produit_Controller extends AbstractController
             'produits' => 'produit'
         ]);
     }
-
-
-    #[Route('/produit/find/{produit}', name: 'app_produit_id')]
-    public function getId(Produit $produit, ProduitRepository $produitrepository): Response
-    {
-
-        $id = $produit->getId();
-
-        $produit = $produitrepository->requete($id);
-
-
-        return $this->render('produit/getId.html.twig', [
-            'produits' => $produit
-        ]);
-    }
-
 
 
     #[Route('/produit/create', name: 'app_produit_create')]
