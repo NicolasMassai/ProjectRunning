@@ -17,6 +17,10 @@ export default function header() {
     localStorage.setItem("userConnected", "false");
   };
 
+  const register = () => {
+    window.location.href = `/register`;
+  };
+  
   const home = () => {
     window.location.href = `/home`;
   };
@@ -114,9 +118,9 @@ export default function header() {
                   <button onClick={handleConnexion} className="dropdown-item">
                     Se Connecter
                   </button>
-                  <a href="/register" className="dropdown-item">
+                  <button onClick={register} className="dropdown-item">
                     S'inscrire
-                  </a>
+                  </button>
                 </div>
               </div>
             )}

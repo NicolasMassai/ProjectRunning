@@ -66,7 +66,7 @@ export default function (props) {
                                 {currentproduit.quantite > 0 ? (
                                     <div>
                                         <h3>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</h3> 
-                                        {currentproduit.role === 'ROLE_USER' && <button className='bouton' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
+                                        {currentproduit.role === 'ROLE_USER' && <button className='boutonProduit' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
                                             {props.button}
                                         </button>}
                                     </div>
@@ -75,20 +75,20 @@ export default function (props) {
                                     )
                                 }
                                 <div>
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(e) => update(currentproduit.id,e)}>
+                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(e) => update(currentproduit.id,e)}>
                                         Modifier le produit
                                     </button>}
 
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(create)}>
+                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(create)}>
                                         Créer un produit
                                     </button>}
                                     
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(e) => Delete(currentproduit.id,e)}>
+                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(e) => Delete(currentproduit.id,e)}>
                                         Supprimer le produit
                                     </button>}
                                 </div>
                                 <div>
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'bouton' type="button" onClick={(categorie)}>
+                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(categorie)}>
                                             Categorie
                                     </button>}
                                 </div>
