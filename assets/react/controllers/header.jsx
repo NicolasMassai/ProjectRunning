@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import userphoto from "./photo/utilisateur.png";
 import runsport from "./photo/runsport.jpg";
 import caddie from "./photo/caddie.png";
 import loginimage from "./photo/login.jpg";
@@ -29,9 +28,6 @@ export default function header() {
     window.location.href = `/panier`;
   }
 
- 
-
-  
 
   const [links, setLinks] = useState(false);
 
@@ -45,7 +41,7 @@ export default function header() {
         <h1 className="accueil"></h1>
         <div className="divParent">
           <div className="divGauche">
-            <img className="runsport" src={runsport} onClick={home} />
+            <img className="runsport"  alt="runsport" src={runsport} onClick={home} />
           </div>
             <div className="divDroite">
                 <img className="panierLogo" src={caddie} onClick={panier} />

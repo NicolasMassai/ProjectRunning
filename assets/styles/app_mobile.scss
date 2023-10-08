@@ -80,7 +80,8 @@ $center: center;
 
     .panier{
     overflow-x: auto;  /* Permet le défilement horizontal si nécessaire */
-    margin: 10px;
+    margin-bottom: 30px; 
+
   }
   
   table {
@@ -148,6 +149,7 @@ $center: center;
     }
 
     .Commande {
+        overflow-x: auto;
         margin-bottom: 3em;
     }
 

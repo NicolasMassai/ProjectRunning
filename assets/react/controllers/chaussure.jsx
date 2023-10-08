@@ -55,7 +55,7 @@ export default function (props) {
 
                 <div className="article-container">
                 {  produit.length > 0  && (
-                    <>
+                    <ul>
                             <li key={currentproduit.id}>
                                 <h1 className='nom'>{currentproduit.nom}</h1>
                                 <img src={constantes.url + currentproduit.image} />
@@ -97,7 +97,7 @@ export default function (props) {
                                 
                             </li>
                         
-                    </>
+                    </ul>
                     
                 )}
                 </div>
