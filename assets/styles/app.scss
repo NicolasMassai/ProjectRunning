@@ -1,502 +1,524 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300");
+
 $bleu: #007bff;
 $vert: #4caf50;
 $bleu_clair: #3498db;
 $blanc: #ffffff;
-$center : center;
+$center: center;
 
 @mixin button {
-  color: $blanc;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+    color: $blanc;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-
 @mixin titre {
-  text-align: $center;
-  color: $bleu_clair;
-  font-size: 60px;
+    text-align: $center;
+    color: $bleu_clair;
+    font-size: 60px;
 }
 
 body {
-  background-color: $blanc;
-}
-
-.boutonProduit {
-  @include button;
-  background-color: $vert;
-  padding: 6px 10px;
-  font-size: 16px;
-  margin: 4px 5px;
-}
-
-img {
-  display: block;
-  width: 40%;
-  margin: auto;
-}
-
-.article-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #c1c1c1;
-  border-radius: 15px;
-  box-shadow: 10px 5px 8px rgba(0, 0, 0, 0.1);
-  text-align: $center;
-}
-
-.nom {
-  text-transform: capitalize;
+    background-color: $blanc;
 }
 
 ::marker {
-  font-size: 0em;
+    font-size: 0em;
+}
+
+
+.boutonProduit {
+    @include button;
+    background-color: $vert;
+    padding: 6px 10px;
+    font-size: 16px;
+    margin: 4px 5px;
+}
+
+img {
+    display: block;
+    width: 40%;
+    margin: auto;
+}
+
+.article-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #c1c1c1;
+    border-radius: 15px;
+    box-shadow: 10px 5px 8px rgba(0, 0, 0, 0.1);
+    text-align: $center;
+}
+
+.nom {
+    text-transform: capitalize;
 }
 
 .precedent::after {
-  content: "\2190"; /* Code unicode pour la flèche vers la gauche */
-  font-size: 60px;
-  display: inline-block;
+    content: "\2190"; /* Code unicode pour la flèche vers la gauche */
+    font-size: 60px;
+    display: inline-block;
 }
 
 .precedent:hover::after {
-  margin: 1px;
+    margin: 1px;
 }
 
 .suivant::after {
-  content: "\2192"; /* Code unicode pour la flèche vers la droite */
-  font-size: 60px;
-  display: inline-block;
+    content: "\2192"; /* Code unicode pour la flèche vers la droite */
+    font-size: 60px;
+    display: inline-block;
 }
 
 .suivant:hover::after {
-  margin: 1px;
+    margin: 1px;
 }
 
 .bloc {
-  display: flex;
-  justify-content: space-between;
-  align-items: $center;
-  padding: 10px;
-  margin-bottom: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: $center;
+    padding: 10px;
+    margin-bottom: 2em;
 }
 
 .precedent,
 .suivant {
-  @include button;
-  padding: 10px 10px;
-  background-color: $bleu;
+    @include button;
+    padding: 10px 10px;
+    background-color: $bleu;
 }
 
 textarea {
-  resize: vertical;
+    resize: vertical;
 }
 
-.panier {
-  padding: 20px;
- 
-}
 table {
-  width: 100%;
+    width: 100%;
 }
 
 thead {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
 tbody {
-  background-color: $blanc;
+    background-color: $blanc;
 }
 
 tfoot {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
-td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: $center;
+td, td{
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: $center;
 }
 
-th {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: $center;
+
+/*Panier*/
+
+.panier {
+    padding: 20px;
 }
+
+.PanierTitre {
+    @include titre;
+}
+
+.PanierTitre::after {
+    content: "\1F6D2";
+}
+
 
 .panierNom {
-  width: 50%;
+    width: 50%;
 }
 
 .panierImage {
-  display: block;
-  width: 30%;
-  margin: auto;
+    display: block;
+    width: 30%;
+    margin: auto;
 }
 
 .add,
 .remove,
 .delete,
-.empty {
-  @include button;
-  background-color: $bleu_clair;
-  font-size: 16px;
+.empty,
+.buy {
+    @include button;
+    background-color: $bleu_clair;
+    font-size: 16px;
 }
 
 .add {
-  padding: 0px 7px;
-  margin-right: 10%;
+    padding: 0px 7px;
+    margin-right: 10%;
 }
 
 .remove {
-  padding: 0px 14px;
-  margin-right: 10%;
+    padding: 0px 14px;
+    margin-right: 10%;
 }
 
 .delete {
-  padding: 0px 10px;
+    padding: 0px 10px;
 }
 
-.empty {
-  padding: 6px 10px;
+.empty, .buy {
+    padding: 6px 10px;
 }
 
 .add::after {
-  content: "\002B "; /* Code unicode pour la flèche vers la gauche */
-  font-size: 40px;
-  display: inline-block;
+    content: "\002B "; /* Code unicode pour la flèche vers la gauche */
+    font-size: 40px;
+    display: inline-block;
 }
 
 .remove::after {
-  content: "\002D "; /* Code unicode pour la flèche vers la gauche */
-  font-size: 40px;
-  display: inline-block;
+    content: "\002D "; /* Code unicode pour la flèche vers la gauche */
+    font-size: 40px;
+    display: inline-block;
 }
 
 .delete::after {
-  content: "\1F5D1 "; /* Code unicode pour la flèche vers la gauche */
-  font-size: 36px;
-  display: inline-block;
+    content: "\1F5D1 "; /* Code unicode pour la flèche vers la gauche */
+    font-size: 36px;
+    display: inline-block;
 }
 
-.PanierTitre {
- @include titre;
-}
-
-.PanierTitre::after {
-  content: "\1F6D2";
-}
 
 .total {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 .Commande {
-  margin-bottom: 3em;
+    margin-bottom: 3em;
 }
 
 .commandeTitre {
-  @include titre;
+    @include titre;
 }
 
 /* Page D'accueil*/
 
 body,
 p {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .accueil {
-  text-align: left;
+    text-align: left;
 }
 
 .accueilImage {
-  width: 50%;
-  margin: 1em auto;
-  margin-bottom: 3em;
+    width: 50%;
+    margin: 1em auto;
+    margin-bottom: 3em;
 }
 
 .runsport {
-  width: 13%;
-  margin-left: 40px;
-  cursor: pointer;
-}
-
-header {
-  position: relative;
-}
-
-.bande {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-  background-color: $bleu;
-}
-
-.bandeBouton {
-  @include button;
-  background-color: $bleu;
-  padding: 10px 15px;
-  font-size: 16px;
-}
-
-footer {
-  background-color: #646464;
-  color: $blanc;
-  text-align: $center;
-  padding: 2px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+    width: 35%;
+    margin-left: 40px;
+    margin-bottom: 0.4em;
+    cursor: pointer;
 }
 
 .panierLogo {
-  @include button;
-  position: absolute;
-  top: 8px;
-  right: 107px;
-  background-color: $blanc;
-  padding: 10px 15px;
-  font-size: 40px;
+    width: 8%;
+    cursor: pointer;
 }
 
-.panierLogo::after {
-  content: "\1F6D2";
+.login,
+.logout {
+    width: 17%;
+    cursor: pointer;
 }
 
-.log {
-  position: absolute;
-  top: 25px;
-  right: 30px;
+.divParent {
+    display: flex;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+.divDroite {
+    display: flex;
+    margin-left: auto;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: $blanc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.panierLogo,
+.login,
+.logout {
+    margin-right: 10px; 
 }
 
-.log:hover .dropdown-content {
-  display: block;
+.panierLogo {
+    transform: translate(450%);
 }
 
-.boutonUser {
-  @include button;
-  background-color: $blanc;
-  padding: 10px 15px;
+header {
+    position: relative;
+    font-family: "Poppins", sans-serif;
 }
 
-.dropdown-item {
-  padding: 10px;
-  color: #333;
-  display: block;
-  width: 100%;
+
+footer {
+    background-color: #646464;
+    color: $blanc;
+    text-align: $center;
+    padding: 2px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .example-wrapper {
-  margin: 2em auto;
-  font: 18px/1.5 sans-serif;
+    margin: 0.5em auto;
+    font: 18px/1.5 sans-serif;
 }
 
 /*Convertisseur*/
 
 .convertisseur {
-  padding: 20px;
-  background-color: #f5f5f5;
+    padding: 20px;
+    background-color: #f5f5f5;
+    margin-bottom: 30px;
 }
 
 .titreConvertisseur {
-  @include titre;
-  margin-bottom: 40px;
-  font-weight: bold;
+    @include titre;
+    margin-bottom: 40px;
+    font-weight: bold;
 }
 
 .formulaire {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .gauche,
 .droite {
-  width: 48%;
-  margin-bottom: 20px;
+    width: 48%;
+    margin-bottom: 20px;
 }
 
 label {
-  display: block;
-  margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .inputConvert {
-  width: 30%;
+    width: 30%;
 }
 
 input,
 textarea {
-  width: 100%;
-  padding: 8px;
-  margin: 5px auto;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  display: inline-block;
+    width: 100%;
+    padding: 8px;
+    margin: 5px auto;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .titreInput {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .btn_convertir {
-  @include button;
-  background-color: $vert;
-  padding: 10px;
+    @include button;
+    background-color: $vert;
+    padding: 10px;
 }
 
 .btn_reset {
-  background-color: #f44336;
-  margin-left: 10px;
+    background-color: #f44336;
+    margin-left: 10px;
 }
 
 .btn_convertir:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 .btn_reset:hover {
-  background-color: #d32f2f;
+    background-color: #d32f2f;
 }
 
 /*Bank*/
 
 .bankTwig {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  text-align: $center;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: $center;
 
-  button {
-    @include button;
-    background-color: $vert;
-    padding: 8px 12px;
-    font-size: 18px;
-    transition: background-color 0.3s;
-    margin-top: 15px;
-  }
-
-  &:hover {
-    transform: scale(1.05);
-
-    button:hover {
-      background-color: #45a049;
+    button {
+        @include button;
+        background-color: $vert;
+        padding: 8px 12px;
+        font-size: 18px;
+        transition: background-color 0.3s;
+        margin-top: 15px;
     }
-  }
+
+    &:hover {
+        transform: scale(1.05);
+
+        button:hover {
+            background-color: #45a049;
+        }
+    }
 }
 
 /*titre Account*/
 .required {
-  font-size: 25px;
+    font-size: 25px;
 }
 
 .bank_container {
-  max-width: 600px;
-  margin: 0 auto;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .bankTitre {
-  font-size: 24px;
-  text-align: $center;
-  margin-bottom: 20px;
+    font-size: 24px;
+    text-align: $center;
+    margin-bottom: 20px;
 }
 
 .bank_id {
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  text-align: $center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: $center;
 }
 
 .bank_id:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .bank_solde {
-  margin-bottom: 10px;
-  font-size: 35px;
+    margin-bottom: 10px;
+    font-size: 35px;
 }
 
 .bank_bouton {
-  @include button;
-  background-color: $vert;
-  padding: 8px 12px;
-  transition: background-color 0.3s ease;
-  font-size: 22px;
-}
-
-.bank_bouton:hover {
-  background-color: #45a049;
-}
-
-.bankBuy {
-  max-width: 500px;
-  margin: 50px auto;
-  text-align: $center;
-
-  button {
     @include button;
     background-color: $vert;
     padding: 8px 12px;
+    transition: background-color 0.3s ease;
     font-size: 22px;
-  }
+}
+
+.bank_bouton:hover {
+    background-color: #45a049;
+}
+
+.bankBuy {
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: $center;
+
+    button {
+        @include button;
+        background-color: $vert;
+        padding: 8px 12px;
+        font-size: 22px;
+    }
+}
+
+/*navbar*/
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    min-height: 20px;
+    padding: 1rem;
+    background-color: $bleu;
+    color: $blanc;
+}
+
+.navbar_links {
+    display: contents;
+}
+
+.navbar_link {
+    padding: 0 0.3rem;
+    color: inherit;
+}
+
+.navbar_menu {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 /*login*/
 
 .formLogin {
-  width: 35%;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 50px;
+    width: 35%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 50px;
 }
 
 .inputLogin {
-  width: 100%;
+    width: 100%;
 }
 
 .boutonLogin {
-  @include button;
-  background-color: $bleu;
-  padding: 10px;
+    @include button;
+    background-color: $bleu;
+    padding: 10px;
+}
+
+.boutonRegister {
+    @include button;
+    background-color: $bleu;
+    padding: 10px;
+    margin-left: 32%;
+    margin-top: 25px;
 }
 
 .register {
-  width: 35%;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 50px;
+    width: 35%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 50px;
 
-  .required {
-    font-size: 25px;
-  }
+    .required {
+        font-size: 25px;
+    }
 }
 
 .titreCategorie {
-  text-align: $center;
+    text-align: $center;
 }

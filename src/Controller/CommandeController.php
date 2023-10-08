@@ -55,11 +55,6 @@ class CommandeController extends AbstractController
         return  $this->json($commande, 200);
 
 
-        /*
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commande,
-        ]);*/
-
     }
       
 }

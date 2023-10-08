@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import userphoto from "./photo/utilisateur.png";
 import runsport from "./photo/runsport.jpg";
+import caddie from "./photo/caddie.png";
+import loginimage from "./photo/login.jpg";
+import logoutimage from "./photo/logout.jpg";
 
 export default function header() {
-
   const isUserConnected = () =>
     localStorage.getItem("userConnected") === "true";
 
@@ -17,115 +19,111 @@ export default function header() {
     localStorage.setItem("userConnected", "false");
   };
 
-  const register = () => {
-    window.location.href = `/register`;
-  };
-  
-  const home = () => {
+
+  function home(){
     window.location.href = `/home`;
   };
 
-  function convertisseur() {
-    window.location.href = `/convertisseur`;
-  }
-
-  function chaussure() {
-    window.location.href = `/produit/chaussure`;
-  }
-
-  function montre() {
-    window.location.href = `/produit/montre`;
-  }
-
-  function solde() {
-    window.location.href = `/bank`;
-  }
-
+ 
   function panier() {
     window.location.href = `/panier`;
   }
 
-  function commande() {
-    window.location.href = `/commandes/historique`;
-  }
+ 
+
+  
+
+  const [links, setLinks] = useState(false);
+
+  const handleListe = () => {
+    setLinks(!links);
+  };
 
   return (
     <div>
       <header>
         <h1 className="accueil"></h1>
-          <img className="runsport" src={runsport} onClick={home} />
-        {isUserConnected() ? (
-          <div className="bande">
-            <button className="bandeBouton" type="button" onClick={chaussure}>
-              Chaussures
-            </button>
-            <button className="bandeBouton" type="button" onClick={montre}>
-              Montres
-            </button>
-            <button
-              className="bandeBouton"
-              type="button"
-              onClick={convertisseur}
-            >
-              Convertisseur
-            </button>
-            <button className="bandeBouton" type="button" onClick={commande}>
-              Commande
-            </button>
-            <button className="bandeBouton" type="button" onClick={solde}>
-              Solde
-            </button>
+        <div className="divParent">
+          <div className="divGauche">
+            <img className="runsport" src={runsport} onClick={home} />
           </div>
-        ) : (
-          <div className="bande">
-            <button className="bandeBouton" type="button" onClick={chaussure}>
-              Chaussures
-            </button>
-            <button className="bandeBouton" type="button" onClick={montre}>
-              Montres
-            </button>
-            <button
-              className="bandeBouton"
-              type="button"
-              onClick={convertisseur}
-            >
-              Convertisseur
-            </button>
-          </div>
-        )}
+            <div className="divDroite">
+                <img className="panierLogo" src={caddie} onClick={panier} />
 
-        <button className="panierLogo" type="button" onClick={panier}></button>
-
-        <div className="log">
-          <div className="dropdown">
-            {isUserConnected() ? (
-              <div>
-                <button className="boutonUser">
-                  <img src={userphoto} />
-                </button>
-                <div className="dropdown-content">
-                  <button onClick={handleDeConnexion} className="dropdown-item">
-                    Deconexion
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <button className="boutonUser">
-                  <img src={userphoto} />
-                </button>
-                <div className="dropdown-content">
-                  <button onClick={handleConnexion} className="dropdown-item">
-                    Se Connecter
-                  </button>
-                  <button onClick={register} className="dropdown-item">
-                    S'inscrire
-                  </button>
-                </div>
-              </div>
-            )}
+                {isUserConnected() ? (
+                  <img
+                    className="logout"
+                    src={logoutimage}
+                    onClick={handleDeConnexion}
+                  />
+                ) : (
+                  <img
+                    className="login"
+                    src={loginimage}
+                    onClick={handleConnexion}
+                  />
+                )}
           </div>
         </div>
+        {isUserConnected() ? (
+          <nav className={`navbar ${links ? "show-nav" : "hide-show"}`}>
+            <div></div>
+            <ul className="navbar_links">
+              <li className="navbar_item">
+                <a href="/produit/chaussure" className="navbar_link">
+                  Chaussure
+                </a>
+              </li>
+              <li className="navbar_item ">
+                <a href="/produit/montre" className="navbar_link">
+                  Montre
+                </a>
+              </li>
+              <li className="navbar_item">
+                <a href="/convertisseur" className="navbar_link">
+                  Convertisseur
+                </a>
+              </li>
+              <li className="navbar_item">
+                <a href="/commandes/historique" className="navbar_link">
+                  Commande
+                </a>
+              </li>
+              <li className="navbar_item">
+                <a href="/bank" className="navbar_link">
+                  Solde
+                </a>
+              </li>
+            </ul>
+            <button className="navbar_menu" onClick={handleListe}>
+              <span className="menu_bar"></span>
+            </button>
+          </nav>
+        ) : (
+          <nav className={`navbar ${links ? "show-nav" : "hide-show"}`}>
+            <div></div>
+            <ul className="navbar_links">
+              <li className="navbar_item slide1">
+                <a href="/produit/chaussure" className="navbar_link">
+                  Chaussure
+                </a>
+              </li>
+              <li className="navbar_item slide2">
+                <a href="/produit/montre" className="navbar_link">
+                  Montre
+                </a>
+              </li>
+              <li className="navbar_item slide3">
+                <a href="/convertisseur" className="navbar_link">
+                  Convertisseur
+                </a>
+              </li>
+            </ul>
+            <button className="navbar_menu" onClick={handleListe}>
+              <span className="menu_bar"></span>
+            </button>
+          </nav>
+        )}
       </header>
     </div>
   );

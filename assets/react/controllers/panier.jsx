@@ -118,7 +118,7 @@ export default function panier() {
                         <td>{maVariableGlobale} €</td>
                         <td>
                             
-                            <button  className = 'empty' type="button" onClick={(boutonbuy)}>
+                            <button  className = 'buy' type="button" onClick={(boutonbuy)}>
                                 Acheter
                             </button>
                         </td>

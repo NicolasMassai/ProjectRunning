@@ -8,14 +8,11 @@ use App\Entity\Commande;
 use App\Service\Service;
 use App\Entity\DetailCommande;
 use App\Repository\UserRepository;
-use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\Query\AST\QuantifiedExpression;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Notifier\Notification\Notification;
@@ -93,14 +90,13 @@ class Panier_Controller extends AbstractController
     #[Route('/remove/{id}', name: 'remove')]
     public function remove(Produit $produit, SessionInterface $session)
     {
-        //On récupère l'id du produit
         $id = $produit->getId();
 
         // On récupère le panier existant
         $panier = $session->get('panier', []);
 
         // On retire le produit du panier s'il n'y a qu'1 exemplaire
-        // Sinon on décrémente sa quantité
+        // Sinon on le décrémente
         if (!empty($panier[$id])) {
             if ($panier[$id] > 1) {
                 $panier[$id]--;
@@ -183,23 +179,22 @@ class Panier_Controller extends AbstractController
                 $this->em->persist($user);
                 $this->em->flush();
 
-                //Le panier n'est pas vide, on crée la commande
+                //On crée la commande
                 $commande = new Commande();
 
                 // On remplit la commande
                 $commande->setUser($this->getUser());
                 $commande->setReference(uniqid());
 
-                // On parcourt le panier pour créer les détails de commande
+                // On créer les détails de commande
                 foreach ($panier as $item => $quantity) {
                     $commandeDetails = new DetailCommande();
 
-                    // On va chercher le produit
+                    // On récupère le produit
                     $product = $produitrepository->find($item);
 
                     $price = $product->getPrix();
 
-                    // On crée le détail de commande
                     $commandeDetails->setProduit($product);
                     $commandeDetails->setPrix($price);
                     $commandeDetails->setQuantite($quantity);
@@ -207,7 +202,6 @@ class Panier_Controller extends AbstractController
                     $commande->addDetailCommande($commandeDetails);
                 }
 
-                // On persiste et on flush
                 $this->em->persist($commande);
                 $this->em->flush();
 
