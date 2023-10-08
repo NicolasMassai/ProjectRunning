@@ -60,19 +60,19 @@ export default function (props) {
                             <li key={currentproduit.id}>
                                 <h1 className='nom'>{currentproduit.nom}</h1>
                                 <img src={constantes.url + currentproduit.image} />
-                                <h3>Description : {currentproduit.description}</h3>
-                                <h3>Prix : {currentproduit.prix} €</h3>
-                                <h3>Couleur : {currentproduit.couleur}</h3>
-                                <h3>Taille de l'écran: {currentproduit.taille} pouces</h3>
+                                <p>Description : {currentproduit.description}</p>
+                                <p>Prix : {currentproduit.prix} €</p>
+                                <p>Couleur : {currentproduit.couleur}</p>
+                                <p>Taille de l'écran: {currentproduit.taille} pouces</p>
                                 {currentproduit.quantite > 0 ? (
                                     <div>
-                                        <h3>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</h3> 
+                                        <p>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</p> 
                                         {currentproduit.role === 'ROLE_USER' && <button className='boutonProduit' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
                                             {props.button}
                                         </button>}
                                     </div>
                                     ) : (
-                                        <h3>En rupture de stock</h3> 
+                                        <p>En rupture de stock</p> 
                                     )
                                 }
 

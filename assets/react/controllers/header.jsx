@@ -65,27 +65,27 @@ export default function header() {
           <nav className={`navbar ${links ? "show-nav" : "hide-show"}`}>
             <div></div>
             <ul className="navbar_links">
-              <li className="navbar_item">
+              <li className="navbar_item slide1" >
                 <a href="/produit/chaussure" className="navbar_link">
                   Chaussures
                 </a>
               </li>
-              <li className="navbar_item ">
+              <li className="navbar_item slide2">
                 <a href="/produit/montre" className="navbar_link">
                   Montres
                 </a>
               </li>
-              <li className="navbar_item">
+              <li className="navbar_item slide3">
                 <a href="/convertisseur" className="navbar_link">
                   Convertisseur
                 </a>
               </li>
-              <li className="navbar_item">
+              <li className="navbar_item slide4">
                 <a href="/commandes/historique" className="navbar_link">
                   Commande
                 </a>
               </li>
-              <li className="navbar_item">
+              <li className="navbar_item slide5">
                 <a href="/bank" className="navbar_link">
                   Solde
                 </a>

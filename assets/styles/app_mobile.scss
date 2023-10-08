@@ -42,7 +42,7 @@ $center: center;
 
     img {
         display: block;
-        width: 80%;
+        width: 60%;
     }
 
     .article-container {
@@ -161,8 +161,8 @@ $center: center;
 
     
     p {
-        margin: 0;
         padding: 0;
+        margin-bottom: 30px;
     }
 
     .accueil {
@@ -214,6 +214,7 @@ $center: center;
 
     header {
         position: relative;
+
     }
 
     footer {
@@ -228,7 +229,7 @@ $center: center;
 
     .example-wrapper {
         margin: 0.5em auto;
-        font: 18px/1.5 sans-serif;
+        font-family: 'Poppins', 'sans-serif';
     }
 
     /*Convertisseur*/
@@ -305,7 +306,7 @@ $center: center;
 
     .bankTwig {
         max-width: 100%;
-        margin: 30px auto;
+        margin: 50px auto;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -427,7 +428,7 @@ $center: center;
     }
 
     .register {
-        width: 100%;
+        width: 80%;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -469,7 +470,7 @@ $center: center;
     .navbar_item::after {
         content: "";
         display: block;
-        margin: 0 auto;
+        margin: auto;
         width: 3vh;
         height: 1px;
         background: $blanc;
@@ -534,4 +535,33 @@ $center: center;
     .show-nav .menu_bar::after {
         transform: rotate(-45deg);
     }
+
+    .navbar_item{
+        transform: translateY(100vh);
+    }
+
+    .show-nav .navbar_item{
+        transform: translateY(0);
+    }
+
+    .show-nav .slide1{
+        transition: all 1s ease-out;
+    }
+
+    .show-nav .slide2{
+        transition: all 1.1s ease-out;
+    }
+
+    .show-nav .slide3{
+        transition: all 1.2s ease-out;
+    }
+
+    .show-nav .slide4{
+        transition: all 1.3s ease-out;
+    }
+
+    .show-nav .slide5{
+        transition: all 1.4s ease-out;
+    }
+
 }

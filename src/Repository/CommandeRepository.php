@@ -32,8 +32,7 @@ class CommandeRepository extends ServiceEntityRepository
                                     WITH d.commande=c.id
                                     JOIN App\Entity\Produit p
                                     WITH d.produit=p.id
-                                    WHERE c.user = '. $x .'
-                                    order by c.id asc');
+                                    WHERE c.user = '. $x .'');
     
         $result = $query->getResult();
         //dd($result);
