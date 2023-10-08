@@ -34,7 +34,7 @@ export default function categories() {
                     </div>
 
                 ))}
-                <button className='bank_bouton' onClick={create}>
+                <button className='Categorie_bouton' onClick={create}>
                     Créer un Catégorie
                 </button>
 

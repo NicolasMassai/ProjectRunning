@@ -97,7 +97,7 @@ export default function commande() {
                         <th>Nom</th>
                         <th>Quantité</th>
                         <th>Prix</th>
-                        <th>Total</th>
+                        <th>Sous-Total</th>
                         <th>Total</th>
                     </tr>
                 </thead>

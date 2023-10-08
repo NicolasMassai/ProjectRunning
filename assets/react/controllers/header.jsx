@@ -71,12 +71,12 @@ export default function header() {
             <ul className="navbar_links">
               <li className="navbar_item">
                 <a href="/produit/chaussure" className="navbar_link">
-                  Chaussure
+                  Chaussures
                 </a>
               </li>
               <li className="navbar_item ">
                 <a href="/produit/montre" className="navbar_link">
-                  Montre
+                  Montres
                 </a>
               </li>
               <li className="navbar_item">
@@ -105,12 +105,12 @@ export default function header() {
             <ul className="navbar_links">
               <li className="navbar_item slide1">
                 <a href="/produit/chaussure" className="navbar_link">
-                  Chaussure
+                  Chaussures
                 </a>
               </li>
               <li className="navbar_item slide2">
                 <a href="/produit/montre" className="navbar_link">
-                  Montre
+                  Montres
                 </a>
               </li>
               <li className="navbar_item slide3">

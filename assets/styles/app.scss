@@ -411,7 +411,7 @@ textarea {
     font-size: 35px;
 }
 
-.bank_bouton {
+.bank_bouton, .Categorie_bouton {
     @include button;
     background-color: $vert;
     padding: 8px 12px;

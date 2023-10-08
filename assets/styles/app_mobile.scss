@@ -76,32 +76,24 @@ $center: center;
     }
 
 
-    table {
-        width: 100%;
-    }
-
-    
-    thead,
-    tfoot {
-        background-color: #f2f2f2;
-    }
-
-    tbody {
-        background-color: $blanc;
-    }
-
-    td,
-    th {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: $center;
-    }
-
     /*Panier*/
 
-    .panier {
-        padding: 20px;
-    }
+    .panier{
+    overflow-x: auto;  /* Permet le défilement horizontal si nécessaire */
+    margin: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
 
 
     .PanierTitre {
@@ -152,7 +144,7 @@ $center: center;
    
 
     .total {
-        font-size: 30px;
+        font-size: 17px;
     }
 
     .Commande {
@@ -296,7 +288,7 @@ $center: center;
 
     .btn_reset {
         background-color: #f44336;
-        margin-left: 0;
+        margin-left: 10px;
     }
 
     .btn_convertir:hover {
@@ -356,7 +348,7 @@ $center: center;
 
     .bank_id {
         padding: 20px;
-        margin: 0 auto;
+        margin: 20px auto;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease-in-out;
@@ -374,12 +366,16 @@ $center: center;
         font-size: 35px;
     }
 
-    .bank_bouton {
+    .bank_bouton, .Categorie_bouton {
         @include button;
         background-color: $vert;
         padding: 8px 12px;
         transition: background-color 0.3s ease;
         font-size: 22px;
+    }
+
+    .Categorie_bouton{
+        margin-left: 29px;
     }
 
     .bank_bouton:hover {

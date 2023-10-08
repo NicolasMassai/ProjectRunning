@@ -227,7 +227,7 @@ const Convertisseur = () => {
             <input className="inputConvert"
               type="text"
               name="vitesse"
-              placeholder="Km/H"
+              placeholder="km/h"
               value={vitesse}
               onChange={handleChange}
             />

@@ -74,7 +74,7 @@ export default function panier() {
                         <th>Produit</th>
                         <th>Prix</th>
                         <th>Quantité</th>
-                        <th>Total</th>
+                        <th>Sous-Total</th>
                         <th>Action</th>
                     </tr>
                 </thead>
