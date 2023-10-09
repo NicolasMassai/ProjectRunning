@@ -16,7 +16,12 @@ $center: center;
 @mixin titre {
     text-align: $center;
     color: $bleu_clair;
-    font-size: 50px;
+    font-size: 40px;
+}
+
+@mixin police{
+    font-family: 'Poppins', 'sans-serif';
+    font-size: 20px;
 }
 
 @media screen and (max-width: 740px) {
@@ -30,7 +35,20 @@ $center: center;
         font-size: 0em;
     }
 
+    .overflow{
+        overflow-x: auto;
+    }
+
+    /*Admin*/
+
+    .produitImage {
+        display: block;
+        width: 100%;
+    }
+
     /*Produit*/
+
+
 
     .boutonProduit {
         @include button;
@@ -45,14 +63,7 @@ $center: center;
         width: 60%;
     }
 
-    .article-container {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 10px 5px 8px rgba(0, 0, 0, 0.1);
-        text-align: $center;
-    }
+   
 
     .nom {
         text-transform: capitalize;
@@ -63,9 +74,6 @@ $center: center;
 
         .precedent,
         .suivant {
-            @include button;
-            padding: 10px 10px;
-            background-color: $bleu;
             margin-bottom: 10px;
             margin-top: 5px;
         }
@@ -78,7 +86,7 @@ $center: center;
 
     /*Panier*/
 
-    .panier{
+    .panier, .admin{
     overflow-x: auto;  /* Permet le défilement horizontal si nécessaire */
     margin-bottom: 30px; 
 
@@ -97,7 +105,7 @@ $center: center;
   }
 
 
-    .PanierTitre {
+    .PanierTitre, .TitreAdmin {
         @include titre;
     }
 
@@ -183,10 +191,16 @@ $center: center;
     }
 
     .panierLogo {
-        width: 15%;
+        transform: translate(70%);
+        width: 13%;
         cursor: pointer;
     }
-
+    
+    .userLogo {
+        transform: translate(200%);
+        width: 11%;
+        cursor: pointer;
+    }
     .login,
     .logout {
         width: 35%;
@@ -208,9 +222,7 @@ $center: center;
         margin-right: 10px; /* Ajoutez une marge entre les images si nécessaire */
     }
 
-    .panierLogo {
-        transform: translate(130%);
-    }
+    
 
     header {
         position: relative;
@@ -234,16 +246,9 @@ $center: center;
 
     /*Convertisseur*/
 
-    .convertisseur {
-        padding: 20px;
-        background-color: #f5f5f5;
-        margin-bottom: 30px;
-    }
 
     .titreConvertisseur {
-        @include titre;
         margin-bottom: 40px;
-        font-weight: bold;
     }
 
     .formulaire {
@@ -367,6 +372,11 @@ $center: center;
     .bank_solde {
         margin-bottom: 10px;    
         font-size: 35px;
+    }
+
+    .categorie {
+        @include police;
+        width: 80%;   
     }
 
     .bank_bouton, .Categorie_bouton {

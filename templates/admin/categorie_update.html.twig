@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div {{ react_component('header')}}></div>
+
+        <div class="bankTwig">
+             <h1>Modifier la Categorie</h1>
+            {{ form(form) }}
+        </div>
+
+<div {{ react_component('footer')}}></div>
+
+{% endblock %}

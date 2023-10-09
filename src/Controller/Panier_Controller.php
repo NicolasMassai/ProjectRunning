@@ -43,7 +43,7 @@ class Panier_Controller extends AbstractController
         return $this->render('panier/panier.html.twig', []);
     }
 
-    #[Route('/2', name: 'index2')]
+    #[Route('/JSON', name: 'index2')]
     public function index(SessionInterface $session, ProduitRepository $produitrepository)
     {
         $panier = $session->get('panier', []);

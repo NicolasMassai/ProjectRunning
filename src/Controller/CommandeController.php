@@ -20,8 +20,8 @@ use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[IsGranted('ROLE_USER')]
 #[Route('/commandes', name: 'app_commandes_')]
+#[IsGranted('ROLE_USER')]
 class CommandeController extends AbstractController
 {
 
@@ -43,7 +43,7 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/historique2', name: 'historique2')]
+    #[Route('/historique/JSON', name: 'historique2')]
     public function historique(CommandeRepository $commanderepository)
     {
 

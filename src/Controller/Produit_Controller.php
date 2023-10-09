@@ -2,22 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Produit;
-use App\Service\Service;
-use App\Form\ProduitType;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\String\ByteString;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-#[IsGranted('ROLE_USER')]
 class Produit_Controller extends AbstractController
 {
 
@@ -31,13 +24,12 @@ class Produit_Controller extends AbstractController
         $this->userRepository = $userRepository;
         $this->em = $em;
     }
-
-    #[Route('/produit/chaussure2', name: 'app_produit_chaussure2')]
+    
+    #[Route('/produit/chaussure/JSON', name: 'app_produit_chaussure2')]
     public function chaussure2(ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->findBy(['categorie' => 1]);
 
-        $user = $this->userRepository->find($this->getUser());
 
         $produits = [];
         foreach ($produit as $product) {
@@ -50,7 +42,6 @@ class Produit_Controller extends AbstractController
                 'taille' => $product->getTaille(),
                 'quantite' => $product->getQuantite(),
                 'image' => $product->getImage(),
-                'role' => current($user->getRoles())
             ];
         }
         return $this->json($produits, 200);
@@ -67,12 +58,11 @@ class Produit_Controller extends AbstractController
 
 
 
-    #[Route('/produit/montre2', name: 'app_produit_montre2')]
+    #[Route('/produit/montre/JSON', name: 'app_produit_montre2')]
     public function montre2(ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->findBy(['categorie' => 2]);
 
-        $user = $this->userRepository->find($this->getUser());
 
         $produits = [];
         foreach ($produit as $product) {
@@ -85,7 +75,6 @@ class Produit_Controller extends AbstractController
                 'taille' => $product->getTaille(),
                 'quantite' => $product->getQuantite(),
                 'image' => $product->getImage(),
-                'role' => current($user->getRoles())
             ];
         }
         return $this->json($produits, 200);
@@ -100,46 +89,4 @@ class Produit_Controller extends AbstractController
         ]);
     }
 
-
-    #[Route('/produit/create', name: 'app_produit_create')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function create(Service $myService, Request $request): Response
-    {
-        $form = $myService->create(
-            $request,
-            new Produit,
-            new ProduitType,
-            new ByteString('home'),
-            new ByteString('produit')
-        );
-
-        return $form;
-    }
-
-    #[Route('/produit/update/{produit}', name: 'app_produit_update')]
-    #[IsGranted("ROLE_ADMIN")]
-    public function update(Produit $produit, Request $request): Response
-    {
-        $form = $this->createForm(ProduitType::class, $produit);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($produit);
-            $this->em->flush();
-            return $this->redirectToRoute('app_home');
-        }
-        return $this->render('produit/update.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-    #[Route('/produit/delete/{produit}', name: 'app_produit_delete')]
-    #[IsGranted("ROLE_ADMIN")]
-    public function delete(Produit $produit, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response
-    {
-
-            $this->em->remove($produit);
-            $this->em->flush();
-        
-        return $this->redirectToRoute("app_home");
-    }
 }

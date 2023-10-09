@@ -10,7 +10,7 @@ export default function commande() {
 
 
     useEffect(() => {
-    fetch(constantes.url + '/commandes/historique2', {method : 'GET'})
+    fetch(constantes.url + '/commandes/historique/JSON', {method : 'GET'})
     .then (response => response.json () )
     .then ( apiProduit => {
         setProduit(apiProduit);
@@ -89,6 +89,7 @@ export default function commande() {
     return (
         <div className='Commande'>
             <h1 className='commandeTitre'> Vos Commandes</h1>
+            <div className='overflow'>
 
             <table>
                 <thead>
@@ -109,6 +110,7 @@ export default function commande() {
                 </tfoot>
 
             </table>
+            </div>
         </div>
         
     );

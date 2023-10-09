@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import runsport from "./photo/runsport.jpg";
 import caddie from "./photo/caddie.png";
 import loginimage from "./photo/login.jpg";
 import logoutimage from "./photo/logout.jpg";
+import user from "./photo/utilisateur.png"
+import { constantes } from '../../constante';
+
 
 export default function header() {
+
+  const [produits, setProduit] = useState([]);
+  const [links, setLinks] = useState(false);
+
+
   const isUserConnected = () =>
     localStorage.getItem("userConnected") === "true";
 
@@ -19,6 +27,8 @@ export default function header() {
   };
 
 
+  
+
   function home(){
     window.location.href = `/home`;
   };
@@ -27,9 +37,28 @@ export default function header() {
   function panier() {
     window.location.href = `/panier`;
   }
+  
+  function redirect() {
+  produits[0]?.role.includes("ROLE_ADMIN") ?
+    window.location.href = `/admin` : 
+      window.location.href = '/compte';
+  }
+
+  
 
 
-  const [links, setLinks] = useState(false);
+
+    useEffect(() => {
+      isUserConnected() && 
+      fetch(constantes.url + '/compte/JSON', {method : 'GET'})
+    .then (response => response.json () )
+    .then ( apiProduit => {
+        setProduit(apiProduit);
+
+    })
+    }, []);
+
+
 
   const handleListe = () => {
     setLinks(!links);
@@ -41,20 +70,23 @@ export default function header() {
         <h1 className="accueil"></h1>
         <div className="divParent">
           <div className="divGauche">
-            <img className="runsport"  alt="runsport" src={runsport} onClick={home} />
+            <img className="runsport"  alt="runsportLogo" src={runsport} onClick={home} />
           </div>
             <div className="divDroite">
-                <img className="panierLogo" src={caddie} onClick={panier} />
+              <img className="userLogo" alt="users" src={user} onClick={redirect}/>
+              <img className="panierLogo" alt="panier" src={caddie} onClick={panier} />
 
                 {isUserConnected() ? (
                   <img
                     className="logout"
+                    alt="deconexion"
                     src={logoutimage}
                     onClick={handleDeConnexion}
                   />
                 ) : (
                   <img
                     className="login"
+                    alt="connexion"
                     src={loginimage}
                     onClick={handleConnexion}
                   />

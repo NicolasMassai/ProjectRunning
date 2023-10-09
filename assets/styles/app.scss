@@ -32,6 +32,33 @@ body {
     font-size: 0em;
 }
 
+/*Admin*/
+
+.boutonInterfaceAdmin{
+    @include button;
+    background-color: $vert;
+    padding: 6px 10px;
+    font-size: 35px;
+    margin: 35px 50px;
+}
+
+
+
+/*produit*/
+
+.boutonPlus
+{
+    border-radius: 10px;
+    color: black;
+    border-color: black;
+    background-color: #cfcfcf;
+    padding: 6px 10px;
+    font-size: 13px;
+    margin: 4px 5px;
+    cursor: pointer;    
+
+}
+
 
 .boutonProduit {
     @include button;
@@ -41,11 +68,12 @@ body {
     margin: 4px 5px;
 }
 
-img {
+img, .produitImage  {
     display: block;
     width: 40%;
     margin: auto;
-}
+} 
+
 
 .article-container {
     max-width: 600px;
@@ -130,15 +158,26 @@ p{
 }
 
 
+
+.categorie {
+    @include police;
+    width: 50%;
+    padding: 20px;
+    margin-bottom: 30px; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
 /*Panier*/
 
-.panier {
+.panier, .admin {
     @include police;
-    padding: 20px;
+    text-align: center;
     margin-bottom: 30px; 
 }
 
-.PanierTitre {
+.PanierTitre, .TitreAdmin {
     @include titre;
 }
 
@@ -242,7 +281,14 @@ body {
 }
 
 .panierLogo {
-    width: 8%;
+    transform: translate(210%);
+    width: 7%;
+    cursor: pointer;
+}
+
+.userLogo {
+    transform: translate(750%);
+    width: 6%;
     cursor: pointer;
 }
 
@@ -267,9 +313,6 @@ body {
     margin-right: 10px; 
 }
 
-.panierLogo {
-    transform: translate(450%);
-}
 
 header {  
     @include police;

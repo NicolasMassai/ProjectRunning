@@ -10,7 +10,7 @@ export default function (props) {
     const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
-    fetch(constantes.url + '/produit/montre2', {method : 'GET'})
+    fetch(constantes.url + '/produit/montre/JSON', {method : 'GET'})
     .then (response => response.json () )
     .then ( apiProduit => {
         setProduit(apiProduit);
@@ -59,7 +59,7 @@ export default function (props) {
                     <ul>
                             <li key={currentproduit.id}>
                                 <h1 className='nom'>{currentproduit.nom}</h1>
-                                <img src={constantes.url + currentproduit.image} />
+                                <img src={constantes.url + currentproduit.image} alt="montre"/>
                                 <p>Description : {currentproduit.description}</p>
                                 <p>Prix : {currentproduit.prix} €</p>
                                 <p>Couleur : {currentproduit.couleur}</p>
@@ -67,33 +67,14 @@ export default function (props) {
                                 {currentproduit.quantite > 0 ? (
                                     <div>
                                         <p>En Stock, Il reste {currentproduit.quantite} exemplaire(s)</p> 
-                                        {currentproduit.role === 'ROLE_USER' && <button className='boutonProduit' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
+                                        <button className='boutonProduit' type="button" onClick={(e) => bouton(currentproduit.id,e)}>
                                             {props.button}
-                                        </button>}
+                                        </button>
                                     </div>
                                     ) : (
                                         <p>En rupture de stock</p> 
                                     )
                                 }
-
-                                <div>
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(e) => update(currentproduit.id,e)}>
-                                        Modifier le produit
-                                    </button>}
-
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(create)}>
-                                        Créer un produit
-                                    </button>}
-
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(e) => Delete(currentproduit.id,e)}>
-                                        Supprimer le produit
-                                    </button>}
-                                </div>
-                                <div>
-                                    {currentproduit.role === 'ROLE_ADMIN' && <button className = 'boutonProduit' type="button" onClick={(categorie)}>
-                                            Categorie
-                                    </button>}
-                                </div>
                                 <span>{currentPage + 1} / {produit.length}</span>
 
                                 

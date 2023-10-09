@@ -10,7 +10,7 @@ export default function panier() {
 
 
     useEffect(() => {
-    fetch(constantes.url + '/panier/2', {method : 'GET'})
+    fetch(constantes.url + '/panier/JSON', {method : 'GET'})
     .then (response => response.json () )
     .then ( apiProduit => {
         setProduit(apiProduit);
@@ -66,6 +66,7 @@ export default function panier() {
     return (
         <div className='panier'>
             <h1 className='PanierTitre'>Votre Panier</h1>
+            <div className='overflow'>
             {maVariableGlobale != 0 ? (
                 
             <table>
@@ -136,8 +137,10 @@ export default function panier() {
                     Vider 
                 </button>
             ) : null}
-        </div>
         
+            </div>
+        </div>
+
     );
 
 

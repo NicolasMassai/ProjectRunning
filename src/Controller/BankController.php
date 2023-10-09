@@ -34,7 +34,7 @@ class BankController extends AbstractController
 
     
 
-    #[Route('/bank2', name: 'app_bank2')]
+    #[Route('/bank/JSON', name: 'app_bank2')]
     public function index2(): Response
     {
 

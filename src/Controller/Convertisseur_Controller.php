@@ -13,11 +13,9 @@ class Convertisseur_Controller extends AbstractController
     #[Route('/convertisseur', name: 'app_convertisseur')]
     public function affichage(): Response
     {
-
         return $this->render('convertisseur/index.html.twig', [
         ]);
-
-       
+ 
     }
 
 }

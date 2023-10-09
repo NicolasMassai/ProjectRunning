@@ -10,7 +10,7 @@ export default function bank() {
 
 
     useEffect(() => {
-    fetch(constantes.url + '/bank2', {method : 'GET'})
+    fetch(constantes.url + '/bank/JSON', {method : 'GET'})
     .then (response => response.json () )
     .then ( apiProduit => {
         setBank(apiProduit);

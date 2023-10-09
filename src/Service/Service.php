@@ -27,7 +27,7 @@ class Service extends AbstractController
     }
    
     
-    public function create(Request $request,$Class, $ClassType, $string ,$string2 ): Response
+    public function create(Request $request,$Class, $ClassType, $string ,$string2, $string3 ): Response
     {
         $var = new $Class();
         $form = $this->createForm($ClassType::class, $var);
@@ -38,7 +38,7 @@ class Service extends AbstractController
             return $this->redirectToRoute('app_'.$string.'');
         }
 
-        return $this->render(''.$string2.'/create.html.twig', [
+        return $this->render(''.$string2.'/'.$string3.'_create.html.twig', [
             'form' => $form->createView()
         ]);
     }
