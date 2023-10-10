@@ -43,6 +43,19 @@ class Service extends AbstractController
         ]);
     }
 
+    public function update(Request $request , $ClassType , $class, $string, $string2, $string3): Response
+    {
+        $form = $this->createForm($ClassType::class, $class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($class);
+            $this->em->flush();
+            return $this->redirectToRoute('app_'.$string.'');
+        }
+        return $this->render(''.$string2.'/'.$string3.'_update.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
    
 
 }

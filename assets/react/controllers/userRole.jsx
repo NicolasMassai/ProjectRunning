@@ -26,11 +26,10 @@ export default function userRole() {
  
 
     return (
-        <div className='bloc'>
+        <main className='bloc'>
         <div className='article-container'>
             <h1 className='TitreAdmin'>Profil</h1>
             {produits.map(produit => (
-                <ul>
                             <li key = {produit.id}>
                                 <p>Nom : {produit.nom}</p>
                                 <p>Prénom : {produit.prenom}</p>
@@ -42,12 +41,11 @@ export default function userRole() {
                                     </button>
                                 </p>                            
                             </li>    
-                </ul>
             ))}
                
 
         </div>
-        </div>
+        </main>
         
     );
 

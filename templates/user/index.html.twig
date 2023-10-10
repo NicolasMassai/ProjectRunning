@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+        <title>RunSport - Mon Compte</title>
+{% endblock %}
 
+{% block body %}
 
     <div {{ react_component('header')}}></div>
     <div {{ react_component('userRole')}}></div>
     <div {{ react_component('footer')}}></div>
 
-
-  
 {% endblock %}

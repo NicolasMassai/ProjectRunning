@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Form\Bank2Type;
 use App\Entity\Commande;
-use App\Service\Service;
 use App\Entity\DetailCommande;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
@@ -179,7 +178,6 @@ class Panier_Controller extends AbstractController
                 $this->em->persist($user);
                 $this->em->flush();
 
-                //On crée la commande
                 $commande = new Commande();
 
                 // On remplit la commande

@@ -38,7 +38,7 @@ export default function produit() {
     };
 
     return (
-        <div className='admin'>
+        <main className='admin'>
             <h1 className='TitreAdmin'>Gestion des Produits</h1>
             <div className='overflow'>
             <table>
@@ -77,7 +77,7 @@ export default function produit() {
                                         </button>
                                     )}
                                 </td>
-                                <td>{produit.prix}</td>                                
+                                <td>{produit.prix}€</td>                                
                                 <td>{produit.couleur}</td>
                                 <td>{produit.taille}</td>
                                 <td>{produit.quantite}</td>
@@ -100,16 +100,10 @@ export default function produit() {
                
 
                 </tbody>
-                <tfoot>
-                
-
-
-                </tfoot>
-
             </table>
             </div>
 
-        </div>
+        </main>
         
     );
 

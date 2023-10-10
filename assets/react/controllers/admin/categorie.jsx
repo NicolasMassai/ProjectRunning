@@ -32,7 +32,7 @@ export default function categories() {
     }
     
     return (
-        <div className='categorie'>
+        <main className='categorie'>
             <h1 className='TitreAdmin'>Gestion des Catégories</h1>
             <table>
                 <thead>
@@ -67,7 +67,7 @@ export default function categories() {
                 </tbody>
             </table>
 
-        </div>
+        </main>
         
         
     )

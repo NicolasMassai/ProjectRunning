@@ -29,7 +29,7 @@ export default function user() {
 
 
     return (
-        <div className='admin'>
+        <main className='admin'>
             <h1 className='TitreAdmin'>Gestion des Utilisateurs</h1>
             <div className='overflow'>
             <table>
@@ -65,16 +65,10 @@ export default function user() {
                
 
                 </tbody>
-                <tfoot>
-                
-
-
-                </tfoot>
-
             </table>
             </div>
 
-        </div>
+        </main>
         
     );
 

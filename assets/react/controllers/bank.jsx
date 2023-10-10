@@ -25,7 +25,7 @@ export default function bank() {
         
     
     return (
-        <div className='bank_container'>
+        <main className='bank_container'>
             <h1 className='bankTitre'>Votre Solde</h1>
 
                 {banks.map(bank => (
@@ -38,7 +38,7 @@ export default function bank() {
 
                 ))}
 
-        </div>
+        </main>
         
         
     )

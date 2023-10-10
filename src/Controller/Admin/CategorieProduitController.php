@@ -31,10 +31,9 @@ class CategorieProduitController extends AbstractController
     #[Route('/categorie_produit', name: 'categorie_produit')]
     public function index(): Response
     {
-        return $this->render('admin/categorie.html.twig', [
-        ]);
+        return $this->render('admin/categorie.html.twig', []);
     }
-    
+
 
     #[Route('/categorie_produit/JSON', name: 'categorie_produit2')]
     public function index2(CategorieProduitRepository $categorieProduitRepository): Response
@@ -47,37 +46,43 @@ class CategorieProduitController extends AbstractController
             $categories[] = [
                 'id' => $product->getId(),
                 'nom' => $product->getName(),
-                
+
             ];
         }
         return $this->json($categories, 200);
     }
-    
+
 
 
     #[Route('/categorie_produit/create', name: 'categorie_produit_create')]
     public function create(Service $myService, Request $request): Response
 
     {
-        $form = $myService->create($request, new CategorieProduit, new CategorieProduitType, 
-                new ByteString('admin_categorie_produit'), new ByteString('admin'), new ByteString('categorie'));
+        $form = $myService->create(
+            $request,
+            new CategorieProduit,
+            new CategorieProduitType,
+            new ByteString('admin_categorie_produit'),
+            new ByteString('admin'),
+            new ByteString('categorie')
+        );
 
         return $form;
     }
 
     #[Route('/categorie_produit/update/{categorie_produit}', name: 'categorie_produit_update')]
-    public function update(CategorieProduit $categorie_produit, Request $request): Response
+    public function update(Service $myService, CategorieProduit $categorie_produit, Request $request): Response
     {
-        $form = $this->createForm(CategorieProduitType::class, $categorie_produit);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($categorie_produit);
-            $this->em->flush();
-            return $this->redirectToRoute('app_admin_categorie_produit');
-        }
-        return $this->render('admin/categorie_update.html.twig', [
-            'form' => $form->createView()
-        ]);
+        $form = $myService->update(
+            $request,
+            new CategorieProduitType,
+            $categorie_produit,
+            new ByteString('admin_categorie_produit'),
+            new ByteString('admin'),
+            new ByteString('categorie')
+        );
+
+        return $form;
     }
 
     #[Route('/categorie_produit/delete/{categorie_produit}', name: 'categorie_produit_delete')]
@@ -85,11 +90,9 @@ class CategorieProduitController extends AbstractController
     public function delete(CategorieProduit $categorie_produit): Response
     {
 
-            $this->em->remove($categorie_produit);
-            $this->em->flush();
-        
+        $this->em->remove($categorie_produit);
+        $this->em->flush();
+
         return $this->redirectToRoute("app_admin_categorie_produit");
     }
-
-
 }

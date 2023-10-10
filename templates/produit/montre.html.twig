@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+        <meta name="keywords" content="RunSport, montre, vente">       
+        <meta name="description" content="Explorez notre collection de montres de running chez RunSport. 
+            Choisissez parmi une variété de montres conçues pour le suivi des performances. 
+            Dotez votre entraînement d'une montre qui s'adapte à votre rythme et atteignez vos objectifs avec élégance.">       
+        <title>RunSport - Montres de Running</title>
+{% endblock %}
+
 {% block body %}
-
-
 
     <div {{ react_component('header')}}></div>
     <div {{ react_component('montre', { 'button': 'Ajouter au Panier'}) }}></div>

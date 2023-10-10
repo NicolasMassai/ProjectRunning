@@ -63,9 +63,10 @@ const Convertisseur = () => {
     const allureSecondes = Math.round((allureEnMinutes2 - allureMinutes) * 60);
     setAllureMinutes(allureMinutes.toString());
     setAllureSecondes(allureSecondes.toString());
-    const allureEnMinutes = parseFloat(allureMinutes) + parseFloat(allureSecondes) / 60;
+    const allureEnMinutes =
+      parseFloat(allureMinutes) + parseFloat(allureSecondes) / 60;
     const nouvelleVitesse = 60 / allureEnMinutes;
-    setVitesse(nouvelleVitesse.toFixed(2));    
+    setVitesse(nouvelleVitesse.toFixed(2));
   };
 
   const convertirAllureVersVitesse = (e) => {
@@ -156,82 +157,85 @@ const Convertisseur = () => {
   };
 
   return (
-    <div className="convertisseur">
+    <main className="convertisseur">
       <label className="titreConvertisseur">Convertisseur</label>
       <form className="formulaire">
         <div className="gauche">
           <br />
-          <label>
-          <span className="titreInput">Distance :</span>
-            <input className="inputConvert"
+          <div>
+            <label className="titreInput">Distance :</label>
+            <input
+              className="inputConvert"
               type="text"
               name="distance"
               placeholder="Kilomètres"
               value={distance}
               onChange={handleChange}
             />
-          </label>
+          </div>
           <br />
-          <label>
-            <div>
-              <span className="titreInput">Temps :</span>
-              <input className="inputConvert
+          <div>
+            <label className="titreInput">Temps :</label>
+            <input
+              className="inputConvert
 "
-                type="text"
-                name="tempsHeures"
-                placeholder="Heures"
-                value={tempsHeures}
-                onChange={handleChange}
-              />
-              <input className="inputConvert
+              type="text"
+              name="tempsHeures"
+              placeholder="Heures"
+              value={tempsHeures}
+              onChange={handleChange}
+            />
+            <input
+              className="inputConvert
 "
-                type="text"
-                name="tempsMinutes"
-                placeholder="Minutes"
-                value={tempsMinutes}
-                onChange={handleChange}
-              />
-              <input className="inputConvert
+              type="text"
+              name="tempsMinutes"
+              placeholder="Minutes"
+              value={tempsMinutes}
+              onChange={handleChange}
+            />
+            <input
+              className="inputConvert
 "
-                type="text"
-                name="tempsSecondes"
-                placeholder="Secondes"
-                value={tempsSecondes}
-                onChange={handleChange}
-              />
-            </div>
-          </label>
+              type="text"
+              name="tempsSecondes"
+              placeholder="Secondes"
+              value={tempsSecondes}
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <div className="droite">
           <br />
-          <label>
-          <span className="titreInput">Allure :</span>
-            <input className="inputConvert"
+          <div>
+            <label className="titreInput">Allure :</label>
+            <input
+              className="inputConvert"
               type="text"
               name="allureMinutes"
               placeholder="Minutes"
               value={allureMinutes}
               onChange={handleChange}
             />
-            <input className="inputConvert"
+            <input
+              className="inputConvert"
               type="text"
               name="allureSecondes"
               placeholder="Secondes"
               value={allureSecondes}
               onChange={handleChange}
             />
-          </label>
+          </div>
           <br />
-          <label>
-          <span className="titreInput">Vitesse :</span>
-            <input className="inputConvert"
-              type="text"
-              name="vitesse"
-              placeholder="km/h"
-              value={vitesse}
-              onChange={handleChange}
-            />
-          </label>
+          <label className="titreInput">Vitesse :</label>
+          <input
+            className="inputConvert"
+            type="text"
+            name="vitesse"
+            placeholder="km/h"
+            value={vitesse}
+            onChange={handleChange}
+          />
         </div>
       </form>
       <div>
@@ -243,7 +247,7 @@ const Convertisseur = () => {
           Reset
         </button>
       </div>
-    </div>
+    </main>
   );
 };
 

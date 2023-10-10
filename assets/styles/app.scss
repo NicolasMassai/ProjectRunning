@@ -16,38 +16,50 @@ $center: center;
 @mixin titre {
     text-align: $center;
     color: $bleu_clair;
-    font-size: 60px;
+    font-size: 3em;
 }
 
 @mixin police{
     font-family: 'Poppins', 'sans-serif';
-    font-size: 20px;
+    font-size: 1.2em;
+}
+
+@mixin marginLR{
+    margin-left: 0.25em;
+    margin-right: 0.25em;
 }
 
 body {
+    @include police;
     background-color: $blanc;
+    margin: 0;
+    padding: 0;
 }
 
 ::marker {
-    font-size: 0em;
+    font-size: 0px;
 }
 
+
 /*Admin*/
+
+
+.admin {
+
+    @include marginLR;
+    text-align: center;
+    margin-bottom: 2em; 
+}
 
 .boutonInterfaceAdmin{
     @include button;
     background-color: $vert;
     padding: 6px 10px;
-    font-size: 35px;
+    font-size: 1.5em;
     margin: 35px 50px;
 }
 
-
-
-/*produit*/
-
-.boutonPlus
-{
+.boutonPlus{
     border-radius: 10px;
     color: black;
     border-color: black;
@@ -60,11 +72,32 @@ body {
 }
 
 
+.titreCategorie {
+    text-align: $center;
+
+}
+
+.categorie {
+    width: 50%;
+    padding: 20px;
+    margin-bottom: 30px; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}
+
+
+/*Produit*/
+
+
+
+
 .boutonProduit {
     @include button;
     background-color: $vert;
     padding: 6px 10px;
-    font-size: 16px;
+    font-size: 0.8em;
     margin: 4px 5px;
 }
 
@@ -110,7 +143,6 @@ img, .produitImage  {
 }
 
 .bloc {
-    @include police;
     display: flex;
     justify-content: space-between;
     align-items: $center;
@@ -125,9 +157,7 @@ img, .produitImage  {
     background-color: $bleu;
 }
 
-textarea {
-    resize: vertical;
-}
+/*Panier*/
 
 table {
     width: 100%;
@@ -158,23 +188,9 @@ p{
 }
 
 
-
-.categorie {
-    @include police;
-    width: 50%;
-    padding: 20px;
-    margin-bottom: 30px; 
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-
-}
-/*Panier*/
-
-.panier, .admin {
-    @include police;
-    text-align: center;
-    margin-bottom: 30px; 
+.panier{
+    @include marginLR;
+    margin-bottom: 50px;
 }
 
 .PanierTitre, .TitreAdmin {
@@ -203,7 +219,7 @@ p{
 .buy {
     @include button;
     background-color: $bleu_clair;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .add {
@@ -247,8 +263,10 @@ p{
     font-size: 30px;
 }
 
+/*Commande*/
+
 .Commande {
-    @include police;
+    @include marginLR;
     margin-bottom: 3em;
 }
 
@@ -258,20 +276,28 @@ p{
 
 /* Page D'accueil*/
 
-body {
-    margin: 0;
-    padding: 0;
-}
 
-.accueil {
-    text-align: left;
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6rem;
+  }
+
+  .text-container {
+    flex: 2;
+    margin: 0 20px;   
+    display: block;
 }
 
 .accueilImage {
     width: 50%;
-    margin: 1em auto;
-    margin-bottom: 3em;
+    margin: 30px auto;
+
+    
 }
+ 
+/*Header*/
 
 .runsport {
     width: 35%;
@@ -300,6 +326,7 @@ body {
 
 .divParent {
     display: flex;
+    margin-top: 25px;
 }
 
 .divDroite {
@@ -315,13 +342,12 @@ body {
 
 
 header {  
-    @include police;
     position: relative;
 }
 
+ /*Footer*/
 
 footer {
-    @include police;
     background-color: #646464;
     color: $blanc;
     text-align: $center;
@@ -335,7 +361,6 @@ footer {
 /*Convertisseur*/
 
 .convertisseur {
-    @include police;
     padding: 20px;
     background-color: #f5f5f5;
     margin-bottom: 30px;
@@ -376,6 +401,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     display: inline-block;
+    resize: vertical;
 }
 
 .titreInput {
@@ -406,7 +432,6 @@ textarea {
 /*Bank*/
 
 .bankTwig {
-    @include police;
     max-width: 500px;
     margin: 70px auto;
     padding: 20px;
@@ -419,7 +444,7 @@ textarea {
         @include button;
         background-color: $vert;
         padding: 8px 12px;
-        font-size: 18px;
+        font-size: 1.2em;
         transition: background-color 0.3s;
         margin-top: 15px;
     }
@@ -433,13 +458,11 @@ textarea {
     }
 }
 
-/*titre Account*/
 .required {
-    font-size: 25px;
+    font-size: 1.5em;
 }
 
 .bank_container {
-    @include police;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -468,12 +491,12 @@ textarea {
     font-size: 35px;
 }
 
-.bank_bouton, .Categorie_bouton {
+.bank_bouton {
     @include button;
     background-color: $vert;
     padding: 8px 12px;
     transition: background-color 0.3s ease;
-    font-size: 22px;
+    font-size: 1.2em;
 }
 
 .bank_bouton:hover {
@@ -564,7 +587,6 @@ a {
 }
 
 .register {
-    @include police;
     width: 35%;
     margin: auto;
     padding: 20px;
@@ -573,12 +595,8 @@ a {
     margin-top: 50px;
 
     .required {
-        font-size: 25px;
+        font-size: 1.3em;
     }
 }
 
-.titreCategorie {
-    @include police;
-    text-align: $center;
 
-}

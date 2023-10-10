@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\ProduitType;
 use App\Form\UserType;
+use App\Service\Service;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\String\ByteString;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,12 +20,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     private EntityManagerInterface $em;
-    private UserRepository $userRepository;
 
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->userRepository = $userRepository;
         $this->em = $em;
     }
 
@@ -62,18 +61,19 @@ class UserController extends AbstractController
   
 
     #[Route('/utilisateurs/update/{user}', name: 'users_update')]
-    public function update(User $user, Request $request): Response
+    public function update(Service $myService, User $user, Request $request): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($user);
-            $this->em->flush();
-            return $this->redirectToRoute('app_admin_users');
-        }
-        return $this->render('admin/user_update.html.twig', [
-            'form' => $form->createView()
-        ]);
+
+        $form = $myService->update(
+            $request,
+            new UserType,
+            $user,
+            new ByteString('admin_users'),
+            new ByteString('admin'),
+            new ByteString('user')
+        );
+
+        return $form;
     }
 
     #[Route('/utilisateurs/delete/{utilisateurs}', name: 'users_delete')]

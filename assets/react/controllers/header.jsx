@@ -64,22 +64,22 @@ export default function header() {
     setLinks(!links);
   };
 
+
   return (
-    <div>
       <header>
-        <h1 className="accueil"></h1>
         <div className="divParent">
           <div className="divGauche">
-            <img className="runsport"  alt="runsportLogo" src={runsport} onClick={home} />
+            <img className="runsport"  alt="runsportLogo" title="Logo RunSport" src={runsport} onClick={home} />
           </div>
             <div className="divDroite">
-              <img className="userLogo" alt="users" src={user} onClick={redirect}/>
-              <img className="panierLogo" alt="panier" src={caddie} onClick={panier} />
+              <img className="userLogo" alt="users" title="Mon compte" src={user} onClick={redirect}/>
+              <img className="panierLogo" alt="panier" title="Panier" src={caddie} onClick={panier} />
 
                 {isUserConnected() ? (
                   <img
                     className="logout"
                     alt="deconexion"
+                    title="Déconnexion"
                     src={logoutimage}
                     onClick={handleDeConnexion}
                   />
@@ -87,6 +87,7 @@ export default function header() {
                   <img
                     className="login"
                     alt="connexion"
+                    title="Connexion"
                     src={loginimage}
                     onClick={handleConnexion}
                   />
@@ -153,6 +154,5 @@ export default function header() {
           </nav>
         )}
       </header>
-    </div>
   );
 }

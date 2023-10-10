@@ -16,24 +16,16 @@ $center: center;
 @mixin titre {
     text-align: $center;
     color: $bleu_clair;
-    font-size: 40px;
+    font-size: 2em;
 }
 
 @mixin police{
     font-family: 'Poppins', 'sans-serif';
-    font-size: 20px;
+    font-size: 1.2em;
 }
 
 @media screen and (max-width: 740px) {
-    body {
-        background-color: $blanc;
-        margin: 0;
-        padding: 0;
-    }
-
-    ::marker {
-        font-size: 0em;
-    }
+  
 
     .overflow{
         overflow-x: auto;
@@ -42,28 +34,17 @@ $center: center;
     /*Admin*/
 
     .produitImage {
-        display: block;
         width: 100%;
     }
 
+    
     /*Produit*/
 
 
-
-    .boutonProduit {
-        @include button;
-        background-color: $vert;
-        padding: 6px 10px;
-        font-size: 16px;
-        margin: 4px 5px;
-    }
-
     img {
-        display: block;
         width: 60%;
     }
 
-   
 
     .nom {
         text-transform: capitalize;
@@ -79,18 +60,10 @@ $center: center;
         }
     }
 
-    textarea {
-        resize: vertical;
-    }
 
 
     /*Panier*/
 
-    .panier, .admin{
-    overflow-x: auto;  /* Permet le défilement horizontal si nécessaire */
-    margin-bottom: 30px; 
-
-  }
   
   table {
     width: 100%;
@@ -109,57 +82,26 @@ $center: center;
         @include titre;
     }
 
-    .PanierTitre::after {
-        content: "\1F6D2";
-    }
+    
     .panierNom {
         width: 100%;
     }
 
     .panierImage {
-        display: block;
         width: 100%;
-        margin: auto;
     }
-
-    .add,
-    .remove,
-    .delete,
-    .empty,
-    .buy {
-        @include button;
-        background-color: $bleu_clair;
-        font-size: 16px;
-    }
-
-    .add {
-        padding: 0px 7px;
-        margin-right: 10%;
-    }
-
-    .remove {
-        padding: 0px 14px;
-        margin-right: 10%;
-    }
-
-    .delete {
-        padding: 0px 10px;
-    }
-
-    .empty .buy {
-        padding: 6px 10px;
-    }
-
    
 
     .total {
         font-size: 17px;
     }
 
-    .Commande {
-        overflow-x: auto;
-        margin-bottom: 3em;
+    .add, .remove{
+        margin-bottom: 10px;
     }
+
+    /*Commande*/
+
 
     .commandeTitre {
         @include titre;
@@ -179,32 +121,36 @@ $center: center;
 
     .accueilImage {
         width: 70%;
-        margin: 1em auto;
-        margin-bottom: 3em;
     }
+    .flex-container {
+        flex-direction: column;
+      }
+      
+      .text-container {
+        margin: 20px 0; 
+        text-align: center; 
+      }
+      
+
+    /*Header*/
 
     .runsport {
         width: 80%;
         margin-left: 20px;
-        margin-bottom: 0.4em;
-        cursor: pointer;
     }
 
     .panierLogo {
         transform: translate(70%);
         width: 13%;
-        cursor: pointer;
     }
     
     .userLogo {
         transform: translate(200%);
         width: 11%;
-        cursor: pointer;
     }
     .login,
     .logout {
         width: 35%;
-        cursor: pointer;
     }
 
     .divParent {
@@ -213,155 +159,45 @@ $center: center;
 
     .divDroite {
         display: flex;
-        margin-left: auto; /* Ceci pousse la deuxième div (panierLogo) et le login vers la droite autant que possible */
+        margin-left: auto; 
     }
 
-    .panierLogo,
-    .login,
-    .logout {
-        margin-right: 10px; /* Ajoutez une marge entre les images si nécessaire */
-    }
-
-    
-
-    header {
-        position: relative;
-
-    }
-
-    footer {
-        background-color: #646464;
-        color: $blanc;
-        text-align: $center;
-        padding: 2px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-
-    .example-wrapper {
-        margin: 0.5em auto;
-        font-family: 'Poppins', 'sans-serif';
-    }
 
     /*Convertisseur*/
 
-
-    .titreConvertisseur {
-        margin-bottom: 40px;
+    .titreConvertisseur{
+        @include titre;
     }
-
     .formulaire {
-        display: flex;
         flex-direction: column;
     }
 
     .gauche,
     .droite {
         width: 100%;
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 10px;
     }
 
     .inputConvert {
         width: 100%;
     }
 
-    input,
-    textarea {
-        width: 100%;
-        padding: 8px;
-        margin: 5px auto;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        display: inline-block;
-    }
-
-    .titreInput {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    .btn_convertir {
-        @include button;
-        background-color: $vert;
-        padding: 10px;
-    }
-
-    .btn_reset {
-        background-color: #f44336;
-        margin-left: 10px;
-    }
-
-    .btn_convertir:hover {
-        background-color: #45a049;
-    }
-
-    .btn_reset:hover {
-        background-color: #d32f2f;
-    }
 
     /*Bank*/
 
     .bankTwig {
         max-width: 100%;
         margin: 50px auto;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-        text-align: $center;
         width: 76%;
-
-        button {
-            @include button;
-            background-color: $vert;
-            padding: 8px 12px;
-            font-size: 18px;
-            transition: background-color 0.3s;
-            margin-top: 15px;
-        }
-
-        &:hover {
-            transform: scale(1.05);
-
-            button:hover {
-                background-color: #45a049;
-            }
-        }
-    }
-
-    /*titre Account*/
-
-    .required {
-        font-size: 25px;
     }
 
     .bank_container {
         max-width: 100%;
-        margin: 0 auto;
     }
 
-    .bankTitre {
-        font-size: 24px;
-        text-align: $center;
-        margin-bottom: 20px;
-    }
 
     .bank_id {
-        padding: 20px;
         margin: 20px auto;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-        text-align: $center;
-        width: 76%;
+        width: 78%;
         
     }
 
@@ -369,90 +205,43 @@ $center: center;
         transform: scale(1.05);
     }
 
-    .bank_solde {
-        margin-bottom: 10px;    
-        font-size: 35px;
-    }
+    /*categorie*/
 
     .categorie {
         @include police;
         width: 80%;   
     }
 
-    .bank_bouton, .Categorie_bouton {
-        @include button;
-        background-color: $vert;
-        padding: 8px 12px;
-        transition: background-color 0.3s ease;
-        font-size: 22px;
-    }
-
-    .Categorie_bouton{
-        margin-left: 29px;
-    }
-
-    .bank_bouton:hover {
-        background-color: #45a049;
-    }
-
     .bankBuy {
         max-width: 100%;
-        margin: 50px auto;
-        text-align: $center;
-
-        button {
-            @include button;
-            background-color: $vert;
-            padding: 8px 12px;
-            font-size: 22px;
-        }
     }
 
     /*login*/
 
     .formLogin {
         width: 80%;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 50px;
     }
 
     .inputLogin {
         width: 100%;
     }
 
-    .boutonLogin {
-        @include button;
-        background-color: $bleu;
-        padding: 10px;
-    }
 
     .boutonRegister {
-        @include button;
-        background-color: $bleu;
-        padding: 10px;
-        margin-left: 9%;
-        margin-top: 25px;
+       margin-left: 9%;
     }
 
     .register {
         width: 80%;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 50px;
+        margin: 10px auto;
+    
 
         .required {
             font-size: 25px;
         }
     }
 
-    .titreCategorie {
-        text-align: $center;
-    }
+
 
     /*navbar*/
 

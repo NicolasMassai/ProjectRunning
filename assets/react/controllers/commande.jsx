@@ -37,26 +37,27 @@ export default function commande() {
     const fusionnerCellules = () => {
 
         const rows = [];
-        // Utiliser un objet pour regrouper les produits par ID
+
+        // On utilise un objet pour regrouper les produits par ID
         const idGroups = {};
 
-        // Parcourir chaque produit dans le tableau
+        // on parcours chaque produit dans le tableau
         produits.forEach((produit) => {
         
-            // Si le groupe pour cet ID n'existe pas, le créer
+            // Si le groupe pour cet ID n'existe pas, on le créer
         if (!idGroups[produit.id]) {
             idGroups[produit.id] = [];
         }
-        // Ajouter le produit au groupe correspondant
+        // On ajoute le produit au groupe correspondant
         idGroups[produit.id].push(produit);
         });
 
-        // Parcourir chaque groupe d'ID
+        // On parcours chaque groupe d'ID
         for (const id in idGroups) {
             const produits = idGroups[id]; // Liste des produits pour cet ID
             const colSpan = produits.length; // Nombre de lignes verticales à fusionner
 
-            // Créer une ligne avec la cellule ID fusionnée verticalement
+            // On Crée une ligne avec la cellule ID fusionnée verticalement
             rows.push(
                 <tr key={id}>
                     <td rowSpan={colSpan}>{id}</td>
@@ -68,7 +69,7 @@ export default function commande() {
                 </tr>
             );
 
-                // Pour les lignes suivantes, créer une nouvelle ligne pour chaque produit
+                // Pour les lignes suivantes, on crée une nouvelle ligne pour chaque produit
             for (let i = 1; i < colSpan; i++) {
                 rows.push(
                 <tr key={`${id}-${i}`}>
@@ -87,7 +88,7 @@ export default function commande() {
 
 
     return (
-        <div className='Commande'>
+        <main className='Commande'>
             <h1 className='commandeTitre'> Vos Commandes</h1>
             <div className='overflow'>
 
@@ -105,13 +106,9 @@ export default function commande() {
                 <tbody>    
                 {fusionnerCellules()} 
                 </tbody>
-                <tfoot>
-
-                </tfoot>
-
             </table>
             </div>
-        </div>
+        </main>
         
     );
 

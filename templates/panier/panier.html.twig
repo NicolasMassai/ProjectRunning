@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+        <title>RunSport - Panier</title>
+{% endblock %}
+
 {% block body %}
-
-
-         
+        
     <div {{ react_component('header')}}></div>
     <div {{ react_component('panier')}}></div>
     <div {{ react_component('footer')}}></div>
-
-
   
 {% endblock %}

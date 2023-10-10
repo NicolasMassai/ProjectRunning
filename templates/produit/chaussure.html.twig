@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
 
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+        <meta name="keywords" content="RunSport, chaussure, vente">       
+        <meta name="description" content="Découvrez la collection de chaussures de running chez RunSport. 
+            Trouvez des chaussures conçues pour offrir confort, performance et style pendant vos courses. 
+            Explorez notre gamme et choisissez les chaussures parfaites pour dépasser vos limites.">       
+        <title>RunSport - Chaussures de Running</title>
+{% endblock %}
+
 {% block body %}
-
-
 
     <div {{ react_component('header')}}></div>
     <div {{ react_component('chaussure', { 'button': 'Ajouter au Panier'}) }}></div>

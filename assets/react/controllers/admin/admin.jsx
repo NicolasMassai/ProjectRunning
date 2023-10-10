@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 
 export default function admin() {
@@ -16,7 +16,7 @@ export default function admin() {
 
 
     return (
-        <div className='admin'>
+        <main className='admin'>
             <h1 className='TitreAdmin'>Interface Administrateur</h1>
 
             {<button className = 'boutonInterfaceAdmin' type="button" onClick={(produit)}>
@@ -30,7 +30,7 @@ export default function admin() {
             {<button className = 'boutonInterfaceAdmin' type="button" onClick={(utilisateurs)}>
                 Utilisateurs
             </button>}     
-        </div>
+        </main>
         
     );
 

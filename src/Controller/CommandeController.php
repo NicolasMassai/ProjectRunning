@@ -2,22 +2,13 @@
 
 namespace App\Controller;
 
-use App\Form\Bank2Type;
-use App\Entity\Commande;
-use PHPUnit\TextUI\Command;
-use App\Entity\DetailCommande;
+
 use App\Repository\UserRepository;
-use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\DetailCommandeRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Notifier\Notification\Notification;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/commandes', name: 'app_commandes_')]
@@ -25,14 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommandeController extends AbstractController
 {
 
-    private EntityManagerInterface $em;
     private UserRepository $userRepository;
 
     
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->em = $em;
     }
     
     #[Route('/historique', name: 'historique')]

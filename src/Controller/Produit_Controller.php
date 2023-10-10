@@ -2,29 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class Produit_Controller extends AbstractController
 {
 
-
-    private EntityManagerInterface $em;
-    private UserRepository $userRepository;
-
-
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
-    {
-        $this->userRepository = $userRepository;
-        $this->em = $em;
-    }
-    
     #[Route('/produit/chaussure/JSON', name: 'app_produit_chaussure2')]
     public function chaussure2(ProduitRepository $produitRepository): Response
     {
@@ -84,9 +70,7 @@ class Produit_Controller extends AbstractController
     public function montre(): Response
     {
 
-        return $this->render('produit/montre.html.twig', [
-            'produits' => 'produit'
-        ]);
+        return $this->render('produit/montre.html.twig');
     }
 
 }
