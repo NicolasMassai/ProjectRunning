@@ -36,6 +36,20 @@ $center: center;
     margin-right: 0.25em;
 }
 
+@keyframes vaEtVient {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+        transform: translateX(75px);
+    }
+    75% {
+        transform: translateX(-75px);
+      }
+  }
+
+
 body {
     @include police;
     background-color: $blanc;
@@ -182,7 +196,7 @@ tfoot {
     background-color: #f2f2f2;
 }
 
-td, td{
+th, td{
     padding: 10px;
     border: 1px solid #ddd;
     text-align: $center;
@@ -605,6 +619,18 @@ a {
     .required {
         font-size: 1.3em;
     }
+}
+
+/*User Compte*/
+
+.blocUser {
+    display: flex;
+    justify-content: space-between;
+    align-items: $center;
+    padding: 10px;
+    margin-bottom: 2em;
+    animation: vaEtVient 3s ease-in-out;
+    animation-delay : 1.8s;
 }
 
 

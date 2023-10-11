@@ -1,28 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300");
 
 $bleu: #007bff;
-$vert: #4caf50;
-$bleu_clair: #3498db;
 $blanc: #ffffff;
 $center: center;
 
-@mixin button {
-    color: $blanc;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
 @mixin titre {
-    text-align: $center;
-    color: $bleu_clair;
     font-size: 2em;
 }
 
-@mixin police{
-    font-family: 'Poppins', 'sans-serif';
-    font-size: 1.2em;
-}
 
 @media screen and (max-width: 740px) {
   
@@ -71,12 +57,6 @@ $center: center;
     margin-bottom: 20px;
   }
   
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-
 
     .PanierTitre, .TitreAdmin {
         @include titre;
@@ -128,7 +108,7 @@ $center: center;
       
       .text-container {
         margin: 20px 0; 
-        text-align: center; 
+        text-align: $center; 
       }
       
 
@@ -168,6 +148,7 @@ $center: center;
     .titreConvertisseur{
         @include titre;
     }
+
     .formulaire {
         flex-direction: column;
     }
@@ -208,7 +189,6 @@ $center: center;
     /*categorie*/
 
     .categorie {
-        @include police;
         width: 80%;   
     }
 
@@ -242,14 +222,13 @@ $center: center;
     }
 
 
-
     /*navbar*/
 
     .navbar_links {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: $center;
+        align-items: $center;
         position: fixed;
         right: -100vw;
         bottom: 0;
@@ -261,8 +240,8 @@ $center: center;
     }
 
     .show-nav .navbar_links {
-        width: 100vh;
-        right: 0;
+        width: 115vh;
+        right: -15vh;
         visibility: visible;
     }
 

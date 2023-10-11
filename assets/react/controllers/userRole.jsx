@@ -26,7 +26,7 @@ export default function userRole() {
  
 
     return (
-        <main className='bloc'>
+        <main className='blocUser'>
         <div className='article-container'>
             <h1 className='TitreAdmin'>Profil</h1>
             {produits.map(produit => (

@@ -45,9 +45,6 @@ export default function header() {
   }
 
   
-
-
-
     useEffect(() => {
       isUserConnected() && 
       fetch(constantes.url + '/compte/JSON', {method : 'GET'})
@@ -95,8 +92,7 @@ export default function header() {
           </div>
         </div>
         {isUserConnected() ? (
-          <nav className={`navbar ${links ? "show-nav" : "hide-show"}`}>
-            <div></div>
+          <nav className={`navbar ${links ? "show-nav" : "hide-show"}`}><div></div>
             <ul className="navbar_links">
               <li className="navbar_item slide1" >
                 <a href="/produit/chaussure" className="navbar_link">
@@ -115,7 +111,7 @@ export default function header() {
               </li>
               <li className="navbar_item slide4">
                 <a href="/commandes/historique" className="navbar_link">
-                  Commande
+                  Commandes
                 </a>
               </li>
               <li className="navbar_item slide5">
