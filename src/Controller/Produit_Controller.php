@@ -12,7 +12,7 @@ class Produit_Controller extends AbstractController
 {
 
     #[Route('/produit/chaussure/JSON', name: 'app_produit_chaussure2')]
-    public function chaussure2(ProduitRepository $produitRepository): Response
+    public function chaussureJSON(ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->findBy(['categorie' => 1]);
 
@@ -45,7 +45,7 @@ class Produit_Controller extends AbstractController
 
 
     #[Route('/produit/montre/JSON', name: 'app_produit_montre2')]
-    public function montre2(ProduitRepository $produitRepository): Response
+    public function montreJSON(ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->findBy(['categorie' => 2]);
 

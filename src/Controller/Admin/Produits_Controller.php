@@ -37,7 +37,7 @@ class Produits_Controller extends AbstractController
 
 
     #[Route('/produit/JSON', name: 'produit2')]
-    public function produit2(ProduitRepository $produitRepository): Response
+    public function produitJSON(ProduitRepository $produitRepository): Response
     {
         $produit = $produitRepository->findAll();
 

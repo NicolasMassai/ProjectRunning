@@ -29,7 +29,7 @@ class UserRoleController extends AbstractController
 
 
     #[Route('/compte', name: 'app_compte')]
-    public function index1(): Response
+    public function index(): Response
     {
 
         return $this->render('user/index.html.twig');
@@ -38,7 +38,7 @@ class UserRoleController extends AbstractController
 
     #[Route('/compte/JSON', name: 'app_compte2')]
 
-    public function index2(): Response
+    public function indexJSON(): Response
     {
 
         $user = $this->userRepository->find($this->getUser());

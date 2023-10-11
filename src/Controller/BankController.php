@@ -35,7 +35,7 @@ class BankController extends AbstractController
     
 
     #[Route('/bank/JSON', name: 'app_bank2')]
-    public function index2(): Response
+    public function indexJSON(): Response
     {
 
         $user = $this->userRepository->find($this->getUser());

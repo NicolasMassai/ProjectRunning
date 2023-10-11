@@ -25,7 +25,7 @@ class CommandeController extends AbstractController
     }
     
     #[Route('/historique', name: 'historique')]
-    public function montre(): Response
+    public function index(): Response
     {
         
         return $this->render('commande/commande.html.twig', [

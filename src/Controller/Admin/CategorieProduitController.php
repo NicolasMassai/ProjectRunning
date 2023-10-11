@@ -36,7 +36,7 @@ class CategorieProduitController extends AbstractController
 
 
     #[Route('/categorie_produit/JSON', name: 'categorie_produit2')]
-    public function index2(CategorieProduitRepository $categorieProduitRepository): Response
+    public function indexJSON(CategorieProduitRepository $categorieProduitRepository): Response
     {
         $categorie = $categorieProduitRepository->findAll();
 
