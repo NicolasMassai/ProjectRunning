@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300");
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700');
 
 $bleu: #007bff;
 $vert: #4caf50;
 $bleu_clair: #3498db;
 $blanc: #ffffff;
 $center: center;
+
 
 @mixin button {
     color: $blanc;
@@ -22,6 +24,11 @@ $center: center;
 @mixin police{
     font-family: 'Poppins', 'sans-serif';
     font-size: 1.2em;
+}
+
+@mixin policeNAV{
+    font-family: 'Charm', 'cursive';
+    font-size: 1.9em;
 }
 
 @mixin marginLR{
@@ -519,6 +526,7 @@ textarea {
 /*navbar*/
 
 .navbar {
+    @include policeNAV;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
